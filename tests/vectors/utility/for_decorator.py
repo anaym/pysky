@@ -1,17 +1,18 @@
-def for_range(name, begin, end, step=1):
+def for_range(name, enum):
     def decorator(foo):
         def decorated(*args, **kwargs):
             if not kwargs:
                 kwargs = {}
             results = []
-            for i in range(begin, end, step):
+            for i in enum:
                 kwargs[name] = i
                 results.append(foo(*args, **kwargs))
             return results
         return decorated
     return decorator
 
-@for_range('i', 1, 100)
+
+@for_range('i', range(0, 100))
 def foo(i):
     print(i)
 
