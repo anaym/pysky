@@ -31,12 +31,14 @@ class Renderer(QGLWidget):
 
     def paintGL(self):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+        glPushMatrix();
         glLoadIdentity()
 
         #glLoadIdentity()
         #gluPerspective(*self.camera.perspective_params)
+        gluPerspective( *self.camera.perspective_params);
+
         gluLookAt(*self.camera.look_params)
-        gluPerspective( 0, 1.33, 0.1, 100.0);
         #glFrustum(-50, 50, -50, 50, 0.1, 100)
 
         #gluSphere(GLU.gluNewQuadric(), 1, 100, 100)
@@ -45,6 +47,7 @@ class Renderer(QGLWidget):
             glTranslated(sphere.centre.x, sphere.centre.y, sphere.centre.z)
             gluSphere(gluNewQuadric(), sphere.radius, 1000, 1000)
             glTranslated(-sphere.centre.x, -sphere.centre.y, -sphere.centre.z)
+        glPopMatrix();
         glFlush()
 
     @property

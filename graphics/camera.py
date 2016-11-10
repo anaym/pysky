@@ -18,4 +18,4 @@ class Camera:
 
     @property
     def perspective_params(self):
-        return 45.0, 1.33, 0.1, 100.0
+        return self.angle, 1.33, 0.1, 100.0
