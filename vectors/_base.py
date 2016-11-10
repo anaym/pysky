@@ -27,10 +27,11 @@ class VectorBase:
         return self.length
 
     def __str__(self):
-        return '(' + self.x + ', ' + self.y + ', ' + self.z + ')'
+        return '(' + str(self.x) + ', ' + str(self.y) + ', ' + str(self.z) + ')'
 
     def __eq__(self, other):
-        if not isinstance(other, Vector):
+        try:
+            return (self.x == other.x) and (self.y == other.y) and (self.z == other.z)
+        except:
             return False
-        return self.x == other.x and self.y == other.y and self.z == other.y
 
