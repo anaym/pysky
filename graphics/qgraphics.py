@@ -17,7 +17,6 @@ class StarsWindow(QtWidgets.QMainWindow):
         self._init_ui()
         self._sky_watch.setFocus()
 
-
     def _init_ui(self):
         panel = QtWidgets.QWidget()
         self.setCentralWidget(panel)
@@ -26,5 +25,5 @@ class StarsWindow(QtWidgets.QMainWindow):
         panel.setLayout(layout)
         layout.addWidget(self._sky_watch, 0, 0)
 
-        self.setWindowTitle("Stars")
+        self.setWindowTitle("Sky")
         self.show()

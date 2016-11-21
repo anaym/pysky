@@ -1,4 +1,3 @@
-import math
 import datetime
 from PyQt5.QtGui import QImage
 from PyQt5.QtGui import QPainter
@@ -6,13 +5,16 @@ from PyQt5.QtWidgets import QWidget
 from geometry.avector import Horizontal, Equatorial
 from graphics.renderer.camera import Camera
 from graphics.renderer.settings import RenderSettings
-from stars.skybase import SkyBase
 from stars.star import Star
 
 
-def fisheye_distortion(dx, dy, sight_radius, z):
-    r = sight_radius * 10 / (1 - abs(z)) # z преобразование для эффект рыюъего глаза
-    return dx*r, dy*r
+def fisheye_distortion(x, y, sight_radius, z):
+    r = sight_radius * 10 / (1 - abs(z))**2 # z преобразование для эффект рыюъего глаза
+    return x*r, y*r
+
+
+def scale_distortion(x, y, sight_radius, z):
+    return x*sight_radius*10, y*sight_radius*10
 
 
 class Canvas(QWidget):
@@ -26,8 +28,14 @@ class Canvas(QWidget):
         self._width = 0
         self._height = 0
         self.objects = []
+        self.distortion = fisheye_distortion
+
+    def _load_distortion(self):
+        self.distortion = fisheye_distortion if self.settings.fisheye else scale_distortion
 
     def repaint(self):
+        self._load_distortion()
+
         self._width, self._height = self.width(), self.height()
         self._painter.begin(self._buffer)
         self._draw_background(self._painter)
@@ -48,12 +56,13 @@ class Canvas(QWidget):
         if not translate:
             pos = Horizontal(star.position.alpha, star.position.delta)
 
-        diameter = 2
+        diameter = 0.01
         delta = pos.to_point() - self.camera.sight_vector.to_point()
         prj_delta = delta.rmul_to_matrix(self.camera.transformation_matrix)
         r = self.camera.sight_vector.angle_to(pos)
         if r <= self.camera.sight_radius:
-            dx, dy = fisheye_distortion(prj_delta.x, prj_delta.y, self.camera.sight_radius, prj_delta.z)
+            dx, dy = self.distortion(prj_delta.x, prj_delta.y, self.camera.sight_radius, prj_delta.z)
+            diameter, _ = self.distortion(diameter, 0, self.camera.sight_radius, prj_delta.z)
             cx, cy = self._width//2 + dx, self._height//2 + dy
             x, y = cx - diameter//2, cy - diameter//2
             p.drawEllipse(x, y, diameter, diameter)

@@ -1,15 +1,16 @@
-import math
-
 import datetime
 from PyQt5 import QtCore
-
 from PyQt5 import QtWidgets
+from PyQt5.QtGui import QStandardItem
+from PyQt5.QtGui import QStandardItemModel
+from PyQt5.QtWidgets import QListView
+from PyQt5.QtWidgets import QPushButton
 
 from geometry.avector import Horizontal
 from graphics.renderer.camera import Camera
 from graphics.renderer.renderer import Canvas
 from graphics.renderer.settings import ControllableRenderSettings
-from graphics.renderer.ui import create_float_widget, create_datetime_widget
+from graphics.renderer.ui import create_float_widget, create_datetime_widget, create_bool_widget
 from stars.skybase import SkyBase
 
 
@@ -40,6 +41,9 @@ class ControllableRenderer(QtWidgets.QWidget):
         self._timer.setInterval(1000 / self.settings.fps)
         self._timer.timeout.connect(self._on_timer_tick)
 
+        self._constellations = sky_sphere.constellations
+
+        self._cmodel = QStandardItemModel()
         self._init_ui()
         self.setFocus()
 
@@ -47,6 +51,20 @@ class ControllableRenderer(QtWidgets.QWidget):
         self._apply_constellation_filter()
         self._on_timer_tick()
         self._timer.start()
+
+    def _create_constellations(self):
+        model = QStandardItemModel()
+        for const in sorted(self._constellations):
+            item = QStandardItem(const)
+            item.setCheckState(False)
+            item.setCheckable(True)
+            model.appendRow(item)
+
+        view = QListView()
+        view.setModel(model)
+        self._cmodel = model
+        view.clicked.connect(lambda: self._apply_constellation_filter())
+        return view
 
     def _init_ui(self):
         layout = QtWidgets.QGridLayout()
@@ -60,6 +78,8 @@ class ControllableRenderer(QtWidgets.QWidget):
         time_zone = QtWidgets.QGridLayout()
         tools_layout.addLayout(time_zone)
 
+        consw = create_bool_widget("fisheye", self._canvas.settings, "fisheye")
+        time_zone.addWidget(consw)
         self._datetime_widget = create_datetime_widget(self._canvas, "datetime", self._datetime_format)
         time_zone.addWidget(self._datetime_widget)
 
@@ -69,12 +89,14 @@ class ControllableRenderer(QtWidgets.QWidget):
         constellation_zone = QtWidgets.QHBoxLayout()
         tools_layout.addLayout(constellation_zone)
 
-        self._constellation_widget = QtWidgets.QComboBox()
-        self._constellation_widget.addItem('')
-        self._constellation_widget.addItems(sorted(self._sky_sphere.get_constellations()))
-        self._constellation_widget.activated.connect(self.setFocus)
-        self._constellation_widget.activated.connect(self._apply_constellation_filter)
-        constellation_zone.addWidget(self._constellation_widget)
+        self._constellation_widget = self._create_constellations()
+        tools_layout.addWidget(self._constellation_widget)
+        bclear = QPushButton("none")
+        bclear.clicked.connect(lambda: self._set_all_cmodel(0))
+        tools_layout.addWidget(bclear)
+        ball = QPushButton("all")
+        ball.clicked.connect(lambda: self._set_all_cmodel(2))
+        tools_layout.addWidget(ball)
 
         camera_layout = QtWidgets.QGridLayout()
         tools_layout.addLayout(camera_layout)
@@ -116,8 +138,17 @@ class ControllableRenderer(QtWidgets.QWidget):
         )
         camera_layout.addWidget(self._sight_vector_altitude, 4, 1)
 
+        camera_layout.addWidget(QtWidgets.QLabel('up_rotation:'), 5, 0)
+        self._rot_wid = create_float_widget(self._canvas.camera, "up_rotation")
+        camera_layout.addWidget(self._rot_wid, 5, 1)
+
         tools_layout.addWidget(QtWidgets.QWidget())
         tools_layout.setStretch(7, 1)
+
+    def _set_all_cmodel(self, value):
+        for i in range(0, self._cmodel.rowCount()):
+            self._cmodel.item(i, 0).setCheckState(value)
+        self._apply_constellation_filter()
 
     def _change_zoom(self, d_zoom):
         d_zoom = max(d_zoom, self._canvas.camera.sight_radius / 90)
@@ -130,6 +161,7 @@ class ControllableRenderer(QtWidgets.QWidget):
         self._canvas.camera.sight_vector += Horizontal(da, dd)
         self._canvas.camera.up_rotation += dr
         self.setFocus()
+        self._rot_wid.setText(str(self._canvas.camera.up_rotation))
 
     def _on_timer_tick(self):
         if self.settings.speed != 0:
@@ -144,10 +176,11 @@ class ControllableRenderer(QtWidgets.QWidget):
         self._datetime_widget.setText(self._canvas.datetime.strftime(self._datetime_format))
 
     def _apply_constellation_filter(self):
-        stars = self._sky_sphere.get_visible_stars(self._canvas.camera, self._canvas.datetime)
-        constellation = self._constellation_widget.currentText()
-        if constellation != '':
-            stars = [star for star in stars if star.constellation == constellation]
+        selected = set()
+        for i in range(0, self._cmodel.rowCount()):
+            if self._cmodel.item(i, 0).checkState() != 0:
+                selected.add(self._cmodel.item(i, 0).text())
+        stars = self._sky_sphere.get_stars(selected)
         self._canvas.objects = stars
         self._canvas.repaint()
 

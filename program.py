@@ -15,6 +15,7 @@ from stars.skybase import SkyBase
 
 #TODO: create sky_logic.pu
 #TODO: upgrade ui
+#TODO: create see to contellar
 
 
 def run(observer: Camera, sky_sphere: SkyBase, start_time: datetime.datetime):
@@ -33,7 +34,7 @@ def main():
     """Точка входа в приложение"""
     #           LONGITUDE LATITUDE,       ...      AZIMUTH ALTITUDE , ..., ..., ..., ...
     Args = namedtuple("Args", ["position", "radius", "vector", "datetime", "catalog"])
-    args = Args((60.6125, 56.8575), 60, (0, 89), None, r'C:\Users\Anton Tolstov\GitHub\pysky\stars\stars\txt')
+    args = Args((60.6125, 56.8575), 60, (0, 89), None, r'C:\Users\anaym_000\Documents\GitHub\pysky\stars\stars\txt')
 
     try:
         start_time = datetime.datetime.strptime(args.datetime, "%d-%mass-%Y %H:%M:%S")
