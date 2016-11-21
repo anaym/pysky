@@ -1,7 +1,7 @@
 import re
 import os
 
-from geometry.equatorial import SecondEquatorial
+from geometry.avector import Equatorial
 from stars.star import Star
 
 # TODO: change regexpes!!!
@@ -16,7 +16,7 @@ class TxtDataBaseParser:
         regex_str_alpha_to_delta = r" "
         regex_str_delta = r"(?P<d_degrees>[\+-] ?\d+): ?(?P<d_minutes>\d+): ?(?P<d_seconds>\d+)"
         regex_str_delta_to_m = r" *?\d+\.\d+ *?-? ?\d+\.\d+.*?"
-        regex_str_m = r"(?P<m>\d+\.\d+)"
+        regex_str_m = r"(?P<mass>\d+\.\d+)"
         regex_str_class=r".*?(?P<class>[OBAFGKM])"
 
         regex_str = regex_str_beginning + regex_str_alpha + regex_str_alpha_to_delta + regex_str_delta + regex_str_delta_to_m + regex_str_m + regex_str_class
@@ -46,7 +46,7 @@ class TxtDataBaseParser:
         delta = self._parse_delta(match)
         m = self._parse_m(match)
         spectral_class = self._parse_class(match)
-        return Star(SecondEquatorial(alpha, delta), m, constellation, spectral_class)
+        return Star(Equatorial(alpha, delta), m, constellation, spectral_class)
 
     @staticmethod
     def _parse_alpha(match):
@@ -65,7 +65,7 @@ class TxtDataBaseParser:
 
     @staticmethod
     def _parse_m(match):
-        m = match.group('m')
+        m = match.group('mass')
         return float(m)
 
     @staticmethod
