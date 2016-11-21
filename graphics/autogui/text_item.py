@@ -1,0 +1,44 @@
+from PyQt5.QtWidgets import QLabel
+from PyQt5.QtWidgets import QLineEdit
+
+from graphics.autogui.item import Item
+from graphics.autogui.label import Label
+
+
+class TextItem(Item):
+    def __init__(self, name: str, setter, getter):
+        super().__init__()
+        self._setter = setter
+        self._getter = getter
+        self._name = name
+        self._widget = QLineEdit()
+        self._edit_mode = False
+        self._apply_edit = False
+        self.addWidget(QLabel(name), 0, 0)
+        self.addWidget(self._widget, 0, 1)
+        self.setSpacing(1)
+        self._widget.returnPressed.connect(self._inverse_editing)
+
+    def _inverse_editing(self):
+        self._edit_mode = not self._edit_mode
+        if self._edit_mode:
+            self._widget.setStyleSheet("QLineEdit { background: rgb(192, 192, 192);}")
+        else:
+            self._apply_edit = True
+            self._widget.setStyleSheet("QLineEdit { background: rgb(255, 255, 255);}")
+
+    def try_save(self):
+        if not self._edit_mode and self._apply_edit:
+            self._apply_edit = False
+            try:
+                self._setter(self._widget.text())
+                return False
+            except Exception as ex:
+                print(str(ex))
+        self._apply_edit = False
+        return False
+
+    def try_load(self):
+        if not self._edit_mode:
+            s = self._getter()
+            self._widget.setText(s)

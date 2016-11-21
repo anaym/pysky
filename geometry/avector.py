@@ -1,20 +1,14 @@
 import math
 from math import sin, cos
+
+from geometry.sky_math import FirstEquatorialToHorizontal
 from geometry.vector import Vector
 
 
-class AngleVectror:
+class AngleVector:
     def __init__(self, alpha, delta):
-        self._alpha = alpha
-        self._delta = delta
-
-    @property
-    def alpha(self):
-        return self._alpha
-
-    @property
-    def delta(self):
-        return self._delta
+        self.alpha = alpha
+        self.delta = delta
 
     def length(self):
         return math.sqrt(self.alpha**2 + self.delta**2)
@@ -23,10 +17,10 @@ class AngleVectror:
         return "({}, {})".format(self.alpha, self.delta)
 
     def __eq__(self, other):
-        return AngleVectror(self.alpha - other.alpha, self.delta - other.delta) < 1e-5
+        return AngleVector(self.alpha - other.alpha, self.delta - other.delta) < 1e-5
 
 
-class Equatorial(AngleVectror):
+class Equatorial(AngleVector):
     def __init__(self, a, d):
         super().__init__(a, d)
 
@@ -35,19 +29,22 @@ class Equatorial(AngleVectror):
 
     def to_horizontal_system(self, latitude, sidereal_time):
         timed = self.apply_time(sidereal_time)
-        delta = math.radians(timed.delta)
+        d = math.radians(timed.delta)
         t = math.radians(timed.alpha)
-        φ = math.radians(latitude)
-        cos_z = sin(φ)*sin(delta) + cos(delta)*cos(φ)*cos(t)
-        sin_z = math.sqrt(1 - cos_z**2)
-        if sin_z == 0:
+        f = math.radians(latitude)
+
+        cosz = FirstEquatorialToHorizontal.cosz(f, d, t)
+        sina_sinz = FirstEquatorialToHorizontal.siza_sinz(d, t)
+        cosa_sinz = FirstEquatorialToHorizontal.cosa_sinz(f, d, t)
+
+        sinz = math.sqrt(1 - cosz**2)
+        if sinz == 0:
             return Horizontal(0, 90)
-        sin_A = cos(delta)*sin(t)/sin_z
-        cos_A = (-cos(φ)*sin(delta) + sin(φ)*cos(delta)*math.cos(t)) / sin_z
-        a = math.atan2(sin_A, cos_A)
-        z = math.atan2(sin_z, cos_z)
-        #TODO: create method to_first_period
-        return Horizontal((math.degrees(a) + 360) % 360, 90 - math.degrees(z))
+        sina = sina_sinz/sinz
+        cosa = cosa_sinz / sinz
+        a = math.atan2(sina, cosa)
+        d = math.atan2(sinz, cosz)
+        return Horizontal.star_compatible(math.degrees(a), 90 - math.degrees(d))
 
     def __add__(self, other):
         return Equatorial(self.alpha + other.alpha, self.delta + other.delta)
@@ -56,7 +53,11 @@ class Equatorial(AngleVectror):
         return Equatorial(self.alpha - other.alpha, self.delta - other.delta)
 
 
-class Horizontal(AngleVectror):
+class Horizontal(AngleVector):
+    @staticmethod
+    def star_compatible(a, d):
+        return Horizontal((a + 360) % 360, d)
+
     def __init__(self, a, d):
         super().__init__(a, d)
 

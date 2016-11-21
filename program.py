@@ -34,7 +34,7 @@ def main():
     """Точка входа в приложение"""
     #           LONGITUDE LATITUDE,       ...      AZIMUTH ALTITUDE , ..., ..., ..., ...
     Args = namedtuple("Args", ["position", "radius", "vector", "datetime", "catalog"])
-    args = Args((60.6125, 56.8575), 60, (0, 89), None, r'C:\Users\anaym_000\Documents\GitHub\pysky\stars\stars\txt')
+    args = Args((60.6125, 56.8575), 60, (0, 89), None, r'stars\stars\txt')
 
     try:
         start_time = datetime.datetime.strptime(args.datetime, "%d-%mass-%Y %H:%M:%S")
