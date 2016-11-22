@@ -56,17 +56,16 @@ class Renderer:
         self._distortion = fisheye_distortion if self.settings.fisheye else scale_distortion
 
     def _draw_object(self, star: Star, p, translate=True):
-        pos = star.position.to_horizontal_system(self.watcher.position.delta, self.watcher.star_time.total_degree)
+        pos = star.position.to_horizontal_system(self.watcher.position.delta, self.watcher.star_time.total_degree % 360)
         if not translate:
             pos = Horizontal(star.position.alpha, star.position.delta)
 
         diameter = 0.01
         delta = pos.to_point() - self.watcher.sight_vector.to_point()
         prj_delta = delta.rmul_to_matrix(self.watcher.transformation_matrix)
-        r = self.watcher.sight_vector.angle_to(pos)
-        if r <= self.watcher.sight_radius:
-            dx, dy = self._distortion(prj_delta.x, prj_delta.y, self.watcher.sight_radius, prj_delta.z)
-            diameter, _ = self._distortion(diameter, 0, self.watcher.sight_radius, prj_delta.z)
+        if self.watcher.sight_vector.angle_to(pos) <= self.watcher.eye_radius:
+            dx, dy = self._distortion(prj_delta.x, prj_delta.y, self.watcher.eye_radius, prj_delta.z)
+            diameter, _ = self._distortion(diameter, 0, self.watcher.eye_radius, prj_delta.z)
             cx, cy = self._width//2 + dx, self._height//2 + dy
             x, y = cx - diameter//2, cy - diameter//2
             p.drawEllipse(x, y, diameter, diameter)

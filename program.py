@@ -7,7 +7,7 @@ from collections import namedtuple
 from PyQt5 import QtWidgets
 
 from geometry.avector import Equatorial, Horizontal
-from graphics.qgraphics import StarsWindow
+from graphics.crenderer import StarsWindow
 from graphics.renderer.camera import Camera
 from graphics.renderer.watcher import Watcher
 from stars.parser import TxtDataBaseParser

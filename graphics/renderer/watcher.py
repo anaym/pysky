@@ -7,7 +7,7 @@ from graphics.renderer.camera import Camera
 
 class Watcher(Camera):
     def __init__(self, position: Horizontal, local_time: datetime, camera: Camera):
-        super().__init__(camera.sight_radius, camera.sight_vector)
+        super().__init__(camera.eye_radius, camera.sight_vector)
         self._position = position
         self._local_time = local_time
         self._star_time = StarTime.from_local(position.alpha, local_time)

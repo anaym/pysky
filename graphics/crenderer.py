@@ -1,52 +1,19 @@
 import datetime
-
-import re
 from PyQt5 import QtCore
 from PyQt5 import QtWidgets
-from PyQt5.QtGui import QPainter
-from PyQt5.QtGui import QStandardItem
 from PyQt5.QtGui import QStandardItemModel
-from PyQt5.QtWidgets import QListView
-from PyQt5.QtWidgets import QPushButton
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QMainWindow
 
 from geometry.avector import Horizontal
-from graphics.autogui.bool_item import BoolItem
-from graphics.autogui.field_item import FloatItem, FieldItem, DateTimeItem
-from graphics.autogui.gui import GUI
-from graphics.autogui.set_item import CheckBoxSet
+from graphics.configurator import Configurator
 from graphics.image_viewer import ImageViewer
-from graphics.renderer.camera import Camera
 from graphics.renderer.renderer import Renderer
 from graphics.renderer.settings import ControllableRenderSettings
 from graphics.renderer.watcher import Watcher
 from stars.skybase import SkyBase
 
 
-class HorizontalItem(FieldItem):
-    #TODO: move to Horizontal
-    @staticmethod
-    def parse_str(s, regexp):
-        match = regexp.match(s)
-        if match is None:
-            print("!")
-            raise ValueError()
-        groups = match.groupdict()
-        if (not ("a" in groups)) or (not ("d" in groups)):
-            print("!!")
-            raise ValueError()
-        print(groups["a"], groups["d"])
-        return Horizontal(float(groups["a"]), float(groups["d"]))
-
-    def __init__(self, obj: object, fname: str):
-        pregex = "^\((?P<a>[+-]?[\d.]+?), ?(?P<d>[+-]?[\d.]+?)\)$"
-        cpregexp = re.compile(pregex)
-        builder = str
-        parser = lambda s: HorizontalItem.parse_str(s, cpregexp)
-        super().__init__(obj, fname, builder, parser)
-
-
-class ControllableRenderer(QtWidgets.QWidget):
+class StarsWindow(QMainWindow):
     def __init__(self, watcher: Watcher, sky_sphere: SkyBase):
         super().__init__()
 
@@ -62,9 +29,6 @@ class ControllableRenderer(QtWidgets.QWidget):
 
             QtCore.Qt.Key_Q: lambda: self._change_sight_vector(0, 0, 10),
             QtCore.Qt.Key_E: lambda: self._change_sight_vector(0, 0, -10),
-
-            QtCore.Qt.Key_Equal: lambda: self._change_zoom(1.5),
-            QtCore.Qt.Key_Minus: lambda: self._change_zoom(2 / 3)
         }
 
         self._timer = QtCore.QTimer(self)
@@ -74,48 +38,37 @@ class ControllableRenderer(QtWidgets.QWidget):
         self._constellations = sky_sphere.constellations
 
         self._cmodel = QStandardItemModel()
-        self._create_configurator()
+        self._create_ui()
         self.setFocus()
 
         self._last_tick_time = datetime.datetime.now()
         self._on_timer_tick()
         self._timer.start()
 
-    def _create_configurator(self):
+    def _switch_pause(self):
+        if self._timer.isActive():
+            self._timer.stop()
+        else:
+            self._timer.start()
+
+    def _create_ui(self):
         main = QtWidgets.QGridLayout()
-        self.setLayout(main)
         self.viewer = ImageViewer()
         main.addWidget(self.viewer, 0, 0)
         main.setColumnStretch(0, 1)
 
-        configurator = QtWidgets.QVBoxLayout()
+        self.setWindowTitle("Sky")
+        self.resize(1000, 700)
+        panel = QtWidgets.QWidget()
+        panel.setLayout(main)
+        self.setCentralWidget(panel)
+        self.show()
 
-        self.gui = GUI("CONFIGURATOR")
-        configurator.addLayout(self.gui)
-
-        camera = self.gui.add(GUI("CAMERA"))
-
-        camera.add(HorizontalItem(self._renderer.watcher, "position"))
-        camera.add(HorizontalItem(self._renderer.watcher, "sight_vector"))
-        camera.add(FloatItem(self._renderer.watcher, "up_rotation"))
-
-        time = self.gui.add(GUI("DATE & TIME"))
-        time.add(DateTimeItem(self._renderer.watcher, "local_time"))
-        time.add(FloatItem(self.settings, "speed"))
-        time.add(FloatItem(self.settings, "speed_rank"))
-
-        other = self.gui.add(GUI("OTHER"))
-        other.add(BoolItem(self._renderer.settings, "fisheye"))
-        other.add(CheckBoxSet(sorted(self._constellations), lambda s: self._apply_constellation_filter(s)))
-
-        main.addLayout(configurator, 0, 1)
-
-    def _change_zoom(self, d_zoom):
-        d_zoom = max(d_zoom, self._renderer.watcher.sight_radius / 90)
-        self.settings.zoom = self.settings.zoom * d_zoom
-        self._renderer.watcher.sight_radius = self._renderer.watcher.sight_radius / d_zoom
-        self._zoom_widget.setText(str(self._renderer.watcher.sight_radius))
-        self.setFocus()
+        self._configurator = Configurator(self._renderer.watcher, self.settings, self._renderer.settings, self._constellations)
+        self._configurator.constellationsChangedHandler = self._apply_constellation_filter
+        self._configurator.imageSaveRequestedHandler = lambda: self.viewer.image.save("sky.jpg")
+        self._configurator.switchPauseRequestedHandler = self._switch_pause
+        main.addLayout(self._configurator, 0, 1)
 
     def _change_sight_vector(self, da=0, dd=0, dr=0):
         self._renderer.watcher.sight_vector += Horizontal(da, dd)
@@ -132,7 +85,7 @@ class ControllableRenderer(QtWidgets.QWidget):
         if self.settings.speed != 0:
             self._update_current_time()
         self._update_image()
-        self.gui.handle()
+        self._configurator.handle()
 
     def _update_current_time(self):
         now = datetime.datetime.now()

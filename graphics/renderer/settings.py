@@ -44,4 +44,6 @@ class ControllableRenderSettings:
 
     @speed_rank.setter
     def speed_rank(self, value):
+        if value > 10:
+            raise ValueError()
         self.speed = 10**(abs(value) - 1)*sign(value)
