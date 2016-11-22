@@ -2,24 +2,12 @@ from math import sqrt, acos
 
 import numpy
 
+from geometry.nvector import NVector
 
-class Vector:
+
+class Vector(NVector):
     def __init__(self, x, y, z):
-        self._x = x
-        self._y = y
-        self._z = z
-
-    @property
-    def x(self):
-        return self._x
-
-    @property
-    def y(self):
-        return self._y
-
-    @property
-    def z(self):
-        return self._z
+        super().__init__((x, y, z))
 
     @property
     def length(self):
@@ -55,30 +43,26 @@ class Vector:
         t = -mul/sqr
         return self + t*plane_normal_vector
 
+    @property
+    def x(self):
+        return self[0]
+
+    @property
+    def y(self):
+        return self[1]
+
+    @property
+    def z(self):
+        return self[2]
+
     def __add__(self, other):
-        return Vector(self.x + other.x, self.y + other.y, self.z + other.z)
+        return Vector(*self._add_(other))
 
     def __mul__(self, other):
-        return Vector(self.x * other, self.y * other, self.z * other)
+        return Vector(*self._mul_(other))
 
     def __rmul__(self, other):
-        return self*other
+        return Vector(*self._mul_(other))
 
     def __sub__(self, other):
-        return self + other*-1
-
-    def __iter__(self):
-        yield self.x
-        yield self.y
-        yield self.z
-
-    def __next__(self):
-        yield self.x
-        yield self.y
-        yield self.z
-
-    def __str__(self):
-        return "({}, {}, {})".format(*self)
-
-    def __eq__(self, other):
-        return self.x == other.x and self.y == other.y and self.z == other.z
+        return Vector(*self._sub_(other))

@@ -17,6 +17,9 @@ class ImageViewer(QWidget):
         self._image = value
         self.repaint()
 
+    def save_to_file(self, name: str):
+        self.image.save(name)
+
     def paintEvent(self, event):
         painter = QPainter()
         painter.begin(self)

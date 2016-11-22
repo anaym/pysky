@@ -17,7 +17,7 @@ class Configurator(GUI):
         camera = self.add(GUI("CAMERA"))
 
         camera.add(HorizontalItem(watcher, "position"))
-        camera.add(HorizontalItem(watcher, "sight_vector"))
+        camera.add(HorizontalItem(watcher, "see"))
         camera.add(FloatItem(watcher, "up_rotation"))
 
         time = self.add(GUI("DATE & TIME"))
@@ -27,7 +27,7 @@ class Configurator(GUI):
 
         other = self.add(GUI("OTHER"))
         other.add(BoolItem(render_settings, "fisheye"))
-        other.add(CheckBoxSet(sorted(constellations), lambda s: self.constellationsChangedHandler(s)))
+        self.constellation_filter = other.add(CheckBoxSet(sorted(constellations), lambda s: self.constellationsChangedHandler(s)))
 
         self.add(ActionItem("Save image", lambda: self.imageSaveRequestedHandler()))
         self.add(ActionItem("Pause", lambda: self.switchPauseRequestedHandler()))

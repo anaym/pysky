@@ -2,19 +2,20 @@ from PyQt5.QtCore import QSize
 from PyQt5.QtGui import QImage
 from PyQt5.QtGui import QPainter
 
-from geometry.avector import Horizontal, Equatorial
+from geometry.horizontal import Horizontal
+from geometry.equatorial import Equatorial
 from graphics.renderer.settings import RenderSettings
 from graphics.renderer.watcher import Watcher
 from stars.star import Star
 
 
-def fisheye_distortion(x, y, sight_radius, z):
-    r = sight_radius * 10 / (1 - abs(z))**2 # z преобразование для эффект рыбъего глаза
+def fisheye_distortion(x, y, radius, z):
+    r = radius * 10 / (1 - abs(z)) ** 2 # z преобразование для эффект рыбъего глаза
     return x*r, y*r
 
 
-def scale_distortion(x, y, sight_radius, z):
-    return x*sight_radius*10, y*sight_radius*10
+def scale_distortion(x, y, radius, z):
+    return x * radius * 10, y * radius * 10
 
 
 class Renderer:
@@ -48,18 +49,29 @@ class Renderer:
             self._height = value
             self._buffer = QImage(QSize(self.width, self.height), QImage.Format_RGB32)
 
-    def _load_distortion(self):
+    def render(self, stars: list) -> QImage:
         self._distortion = fisheye_distortion if self.settings.fisheye else scale_distortion
 
-    def _draw_object(self, star: Star, p, translate=True):
-        pos = star.position.to_horizontal_system(self.watcher.position.delta, self.watcher.star_time.total_degree % 360)
-        if not translate:
-            pos = Horizontal(star.position.alpha, star.position.delta)
+        self._painter.begin(self._buffer)
+        self._draw_background(self._painter)
+        self.settings.apply_color("star", self._painter)
+        for o in (self._apply_time_rotation(s) for s in stars):
+            self._draw_object(o, self._painter)
+        self.settings.apply_color("up", self._painter)
+        self._draw_object(Horizontal(0, 90), self._painter)
+        self.settings.apply_color("down", self._painter) #TODO: what is it? Повторить отображения координат
+        self._draw_object(Horizontal(0, -90), self._painter)
+        self._painter.end()
+        return self._buffer
 
+    def _apply_time_rotation(self, star: Star):
+        return star.position.to_horizontal_system(self.watcher.position.h, self.watcher.star_time.total_degree % 360)
+
+    def _draw_object(self, pos: Horizontal, p):
         diameter = 0.01
-        delta = pos.to_point() - self.watcher.sight_vector.to_point()
+        delta = pos.to_point() - self.watcher.see.to_point()
         prj_delta = delta.rmul_to_matrix(self.watcher.transformation_matrix)
-        if self.watcher.sight_vector.angle_to(pos) <= self.watcher.eye_radius:
+        if self.watcher.see.angle_to(pos) <= self.watcher.eye_radius:
             dx, dy = self._distortion(prj_delta.x, prj_delta.y, self.watcher.eye_radius, prj_delta.z)
             diameter, _ = self._distortion(diameter, 0, self.watcher.eye_radius, prj_delta.z)
             cx, cy = self._width//2 + dx, self._height//2 + dy
@@ -70,17 +82,3 @@ class Renderer:
         self.settings.apply_color("sky", p)
         p.drawRect(0, 0, self.width, self.height)
 
-    def render(self, stars: list) -> QImage:
-        self._load_distortion()
-
-        self._painter.begin(self._buffer)
-        self._draw_background(self._painter)
-        self.settings.apply_color("star", self._painter)
-        for o in stars:
-            self._draw_object(o, self._painter)
-        self.settings.apply_color("up", self._painter)
-        self._draw_object(Star(Equatorial(0, 90), ''), self._painter, False)
-        self.settings.apply_color("down", self._painter)
-        self._draw_object(Star(Equatorial(0, -90), ''), self._painter, False)
-        self._painter.end()
-        return self._buffer

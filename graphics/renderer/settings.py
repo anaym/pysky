@@ -34,7 +34,6 @@ class RenderSettings:
 
 class ControllableRenderSettings:
     def __init__(self):
-        self.fps = 30
         self.speed = 1
         self.zoom = 1
 

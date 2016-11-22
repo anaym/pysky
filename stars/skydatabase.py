@@ -1,10 +1,10 @@
 import datetime
 
-from geometry.avector import Equatorial
+from geometry.equatorial import Equatorial
 from stars.star import Star
 
 
-class SkyBase:
+class SkyDataBase:
     def __init__(self, stars):
         self._stars = stars
         self._constellations = {star.constellation: [] for star in stars}

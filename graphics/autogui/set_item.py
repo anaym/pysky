@@ -10,7 +10,7 @@ class CheckBoxSet(Item):
     def __init__(self, str_set, handler=None):
         super().__init__()
         self._src = set(str_set)
-        self._selected = set()
+        self._selected = set(str_set)
         self._handlers = [] if handler is None else [handler]
         self._create_widget()
         self._create_buttons()
@@ -19,7 +19,7 @@ class CheckBoxSet(Item):
         self._model = QStandardItemModel()
         for row in sorted(self._src):
             item = QStandardItem(row)
-            item.setCheckState(False)
+            item.setCheckState(2)
             item.setCheckable(True)
             item.setEditable(False)
             self._model.appendRow(item)
@@ -71,4 +71,3 @@ class CheckBoxSet(Item):
 
     def try_save(self):
         pass
-
