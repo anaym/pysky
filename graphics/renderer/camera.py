@@ -1,9 +1,7 @@
-import datetime
-
 import numpy
 
 from geometry.avector import Horizontal
-from geometry.sky_math import StarTimeHelper
+
 
 #TODO: Watcher [+latitude, longitude, datetime, star_datetime]--> Camera
 #TODO: rename sight_vector to see

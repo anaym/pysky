@@ -3,8 +3,8 @@ from PyQt5 import QtCore
 from PyQt5 import QtWidgets
 from PyQt5.QtGui import QStandardItemModel
 from PyQt5.QtWidgets import QMainWindow
-
 from geometry.avector import Horizontal
+from graphics.autogui.cast_tools import to_widget
 from graphics.configurator import Configurator
 from graphics.image_viewer import ImageViewer
 from graphics.renderer.renderer import Renderer
@@ -59,16 +59,14 @@ class StarsWindow(QMainWindow):
 
         self.setWindowTitle("Sky")
         self.resize(1000, 700)
-        panel = QtWidgets.QWidget()
-        panel.setLayout(main)
-        self.setCentralWidget(panel)
+        self.setCentralWidget(to_widget(main))
         self.show()
 
         self._configurator = Configurator(self._renderer.watcher, self.settings, self._renderer.settings, self._constellations)
         self._configurator.constellationsChangedHandler = self._apply_constellation_filter
         self._configurator.imageSaveRequestedHandler = lambda: self.viewer.image.save("sky.jpg")
         self._configurator.switchPauseRequestedHandler = self._switch_pause
-        main.addLayout(self._configurator, 0, 1)
+        main.addWidget(self._configurator.to_widget(), 0, 1)
 
     def _change_sight_vector(self, da=0, dd=0, dr=0):
         self._renderer.watcher.sight_vector += Horizontal(da, dd)

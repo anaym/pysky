@@ -2,6 +2,8 @@ import re
 import os
 
 from geometry.avector import Equatorial
+from stars.sky_math import TimeHelper
+from stars.skybase import SkyBase
 from stars.star import Star
 
 # TODO: change regexpes!!!
@@ -9,66 +11,52 @@ from stars.star import Star
 # TODO: make refactoring
 # TODO: разобраться с еденицами изменрения при парсинге!!!! (ГРАДУСЫ/ЧАСЫ)
 
+# Alf: [0; 23] : [0; 59] : [0; 59]
+# Del: [-90; 90] : [0; 59] : [0; 59]
+
+
+def num_regexp(name: str):
+    return r"(?P<{}>[\+-]? *?[\d\.]+)".format(name)
+
+
+def any_num_regexp(separator: str, name: str, count: int):
+    tmp = ""
+    for i in range(0, count - 1):
+        tmp += num_regexp(name + '_' + str(i)) + "{} ?".format(separator)
+    tmp += num_regexp(name + '_' + str(count - 1))
+    return tmp
+
+
+def extract_nums(parsed, name: str, count: int):
+    nums = []
+    for i in range(0, count):
+        nm = name + '_' + str(i)
+        if nm in parsed:
+            nums.append(float(parsed[nm].replace(' ', '')))
+        else:
+            raise ValueError()
+    return nums
+
+print(any_num_regexp(':', "alf", 3))
+
+
 class TxtDataBaseParser:
     def __init__(self):
-        regex_str_beginning = r" *?\w+ *?"
-        regex_str_alpha = r"(?P<a_hours>\d+): ?(?P<a_minutes>\d+): ?(?P<a_seconds>\d+\.\d+)"
-        regex_str_alpha_to_delta = r" "
-        regex_str_delta = r"(?P<d_degrees>[\+-] ?\d+): ?(?P<d_minutes>\d+): ?(?P<d_seconds>\d+)"
-        regex_str_delta_to_m = r" *?\d+\.\d+ *?-? ?\d+\.\d+.*?"
-        regex_str_m = r"(?P<mass>\d+\.\d+)"
-        regex_str_class=r".*?(?P<class>[OBAFGKM])"
+        map_re = r"^ *?{} *?".format(num_regexp("map"))
+        pos_re = any_num_regexp(':', 'alf', 3) + ' ' + any_num_regexp(':', 'del', 3)
+        self._regex = re.compile(map_re + pos_re)
 
-        regex_str = regex_str_beginning + regex_str_alpha + regex_str_alpha_to_delta + regex_str_delta + regex_str_delta_to_m + regex_str_m + regex_str_class
-        self._regex = re.compile(regex_str)
+    def parse(self, line_const_tuples):
+        stars = [i for i in (self.parse_star(t) for t in line_const_tuples) if i is not None]
+        return SkyBase(stars)
 
-    def parse_dir(self, dirname: str):
-        stars = []
-        for filename in os.listdir(dirname):
-            if filename.endswith('.txt'):
-                stars += self.parse_file(os.path.join(dirname, filename), filename.split('.')[0])
-        return stars
-
-    def parse_file(self, filename: str, constellation: str) -> list:
-        with open(filename, 'r') as file:
-            stars = []
-            for line in file.readlines():
-                star = self.parse_star(line, constellation)
-                if star is not None:
-                    stars.append(star)
-            return stars
-
-    def parse_star(self, line: str, constellation: str) -> Star:
-        match = self._regex.match(line)
-        if match is None:
-            return None
-        alpha = self._parse_alpha(match)
-        delta = self._parse_delta(match)
-        m = self._parse_m(match)
-        spectral_class = self._parse_class(match)
-        return Star(Equatorial(alpha, delta), m, constellation, spectral_class)
-
-    @staticmethod
-    def _parse_alpha(match):
-        hours = match.group('a_hours')
-        minutes = match.group('a_minutes')
-        seconds = match.group('a_seconds')
-        return (float(hours) + float(minutes) / 60 + float(seconds) / 3600) * 15
-
-    @staticmethod
-    def _parse_delta(match):
-        degrees = match.group('d_degrees')
-        degrees = degrees.replace(' ', '')
-        minutes = match.group('d_minutes')
-        seconds = match.group('d_seconds')
-        return float(degrees) + float(minutes) / 60 + float(seconds) / 3600
-
-    @staticmethod
-    def _parse_m(match):
-        m = match.group('mass')
-        return float(m)
-
-    @staticmethod
-    def _parse_class(match):
-        spectral_class = match.group('class')
-        return spectral_class
+    def parse_star(self, pair) -> Star:
+        try:
+            parsed = self._regex.match(pair[0]).groupdict()
+            a_h, a_m, a_s = extract_nums(parsed, 'alf', 3)
+            d_d, d_m, d_s = extract_nums(parsed, 'del', 3)
+            a = TimeHelper.time_to_degree(a_h, a_m, a_s)
+            d = TimeHelper.time_to_degree(0, d_m, d_s) + d_d
+            return Star(Equatorial(a, d), pair[1])
+        except Exception as ex:
+            print(ex)

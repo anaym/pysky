@@ -1,8 +1,7 @@
 import datetime
-
 from geometry.avector import Horizontal
-from geometry.sky_math import StarTime
 from graphics.renderer.camera import Camera
+from stars.star_time import StarTime
 
 
 class Watcher(Camera):
@@ -11,8 +10,6 @@ class Watcher(Camera):
         self._position = position
         self._local_time = local_time
         self._star_time = StarTime.from_local(position.alpha, local_time)
-        #if latitude == 90 or latitude == -90:
-        #    latitude += 1e-9
 
     @property
     def local_time(self):

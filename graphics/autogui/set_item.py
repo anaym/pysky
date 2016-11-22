@@ -21,12 +21,15 @@ class CheckBoxSet(Item):
             item = QStandardItem(row)
             item.setCheckState(False)
             item.setCheckable(True)
+            item.setEditable(False)
             self._model.appendRow(item)
 
         view = QListView()
         view.setModel(self._model)
         view.clicked.connect(lambda: self._on_change())
+        self._model.itemChanged.connect(lambda: self._on_change())
 
+        self._lock = False
         self._widget = view
         self.addWidget(self._widget)
 
@@ -39,6 +42,8 @@ class CheckBoxSet(Item):
         self.addWidget(ball)
 
     def _on_change(self):
+        if self._lock:
+            return
         selected = set()
         for i in range(0, self._model.rowCount()):
             if self._model.item(i, 0).checkState() != 0:
@@ -48,8 +53,10 @@ class CheckBoxSet(Item):
             h(selected)
 
     def _change_state_for_all(self, mode):
+        self._lock = True
         for i in range(0, self._model.rowCount()):
             self._model.item(i, 0).setCheckState(mode)
+        self._lock = False
         self._on_change()
 
     @property

@@ -39,26 +39,15 @@ class StarTimeHelper:
         return dwhole + dfrac
 
 
-class StarTime:
+class TimeHelper:
     @staticmethod
-    def from_local(longitude: float, local: datetime):
-        return StarTime(StarTimeHelper.get_star_hour(longitude, local))
+    def time_to_seconds(h, m, s):
+        return float(h)*3600 + float(m)*60 + float(s)
 
-    def __init__(self, hours: int):
-        self._hours = hours
+    @staticmethod
+    def seconds_to_degree(s):
+        return s*15/3600
 
-    @property
-    def total_hours(self):
-        return self._hours
-
-    @property
-    def total_minutes(self):
-        return self.total_hours * 60
-
-    @property
-    def total_seconds(self):
-        return self.total_minutes * 60
-
-    @property
-    def total_degree(self):
-        return self.total_hours * 15
+    @staticmethod
+    def time_to_degree(h, m, s):
+        return TimeHelper.seconds_to_degree(TimeHelper.time_to_seconds(h, m, s))

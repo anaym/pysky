@@ -15,9 +15,9 @@ class SkyBase:
     def constellations(self):
         return self._constellations.keys()
 
-    def get_stars(self, avaible_constellations: set):
+    def get_stars(self, available_constellations: set):
         stars = []
-        for constellation in avaible_constellations:
+        for constellation in available_constellations:
             if not constellation in self._constellations:
                 continue
             for star in self._constellations[constellation]:

@@ -1,12 +1,9 @@
-#!/usr/bin/env python3
-"""Графическая версия игры «Небо»"""
 import datetime
+import os
 import sys
 from collections import namedtuple
-
 from PyQt5 import QtWidgets
-
-from geometry.avector import Equatorial, Horizontal
+from geometry.avector import Horizontal
 from graphics.crenderer import StarsWindow
 from graphics.renderer.camera import Camera
 from graphics.renderer.watcher import Watcher
@@ -17,6 +14,21 @@ from stars.skybase import SkyBase
 #TODO: create sky_logic.pu
 #TODO: upgrade ui
 #TODO: create see to contellar
+#TODO: see (0, -90) at (56, -60) only северное полушарие!!! ВСЕ НОРМ
+#TODO: see (0, 90) at (0, -90) only северное полушарие!!! ВСЕ НОРМ
+
+
+def get_all_files_in_dir(path: str, ext: str):
+    for fn in os.listdir(path):
+        if fn.endswith(ext):
+            yield (os.path.join(path, fn), fn.split('.')[0])
+
+
+def get_all_lines_in_dir(path: str, ext: str):
+    for p, fn in get_all_files_in_dir(path, ext):
+        with open(p, 'r') as file:
+            for line in file:
+                yield (line, fn)
 
 
 def run(watcher: Watcher, sky_sphere: SkyBase):
@@ -46,8 +58,7 @@ def main():
     camera = Camera(args.radius, sight_vector)
     watcher = Watcher(Horizontal(args.position[0], args.position[1]), start_time, camera)
     star_parser = TxtDataBaseParser()
-    stars = star_parser.parse_dir(args.catalog)
-    sky_sphere = SkyBase(stars)
+    sky_sphere = star_parser.parse(get_all_lines_in_dir(args.catalog, '.txt'))
     sys.exit(run(watcher, sky_sphere))
 
 if __name__ == '__main__':

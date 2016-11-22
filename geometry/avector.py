@@ -1,8 +1,7 @@
 import math
-from math import sin, cos
 
-from geometry.sky_math import FirstEquatorialToHorizontal
 from geometry.vector import Vector
+from stars.sky_math import FirstEquatorialToHorizontal
 
 
 class AngleVector:
