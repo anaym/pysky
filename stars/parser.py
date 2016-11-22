@@ -7,7 +7,7 @@ from stars.star import Star
 # TODO: change regexpes!!!
 # TODO: rename static methods!!!
 # TODO: make refactoring
-
+# TODO: разобраться с еденицами изменрения при парсинге!!!! (ГРАДУСЫ/ЧАСЫ)
 
 class TxtDataBaseParser:
     def __init__(self):

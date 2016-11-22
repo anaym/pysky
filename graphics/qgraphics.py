@@ -1,19 +1,17 @@
-import datetime
-
 from PyQt5 import QtWidgets
 
-from graphics.renderer.camera import Camera
-from graphics.renderer.crenderer import ControllableRenderer
+from graphics.crenderer import ControllableRenderer
+from graphics.renderer.watcher import Watcher
 from stars.skybase import SkyBase
 
 
 class StarsWindow(QtWidgets.QMainWindow):
     """Главное окно приложения"""
-    def __init__(self, observer: Camera, sky_sphere: SkyBase, start_time: datetime.datetime):
+    def __init__(self, watcher: Watcher, sky_sphere: SkyBase):
         super().__init__()
 
         self.resize(700, 700)
-        self._sky_watch = ControllableRenderer(observer, sky_sphere, start_time)
+        self._sky_watch = ControllableRenderer(watcher, sky_sphere)
         self._init_ui()
         self._sky_watch.setFocus()
 

@@ -2,15 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c255ccb-d2a1-4441-a57b-39b8b903fb78" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/graphics/renderer/ui.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/graphics/renderer/autoui.py" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/graphics/renderer/crenderer.py" afterPath="$PROJECT_DIR$/graphics/crenderer.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/pysky.iml" afterPath="$PROJECT_DIR$/.idea/pysky.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/geometry/avector.py" afterPath="$PROJECT_DIR$/geometry/avector.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/graphics/renderer/crenderer.py" afterPath="$PROJECT_DIR$/graphics/renderer/crenderer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/graphics/renderer/settings.py" afterPath="$PROJECT_DIR$/graphics/renderer/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/geometry/sky_math.py" afterPath="$PROJECT_DIR$/geometry/sky_math.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/graphics/qgraphics.py" afterPath="$PROJECT_DIR$/graphics/qgraphics.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/graphics/renderer/camera.py" afterPath="$PROJECT_DIR$/graphics/renderer/camera.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/graphics/renderer/renderer.py" afterPath="$PROJECT_DIR$/graphics/renderer/renderer.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/program.py" afterPath="$PROJECT_DIR$/program.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/stars/parser.py" afterPath="$PROJECT_DIR$/stars/parser.py" />
     </list>
     <ignored path="pysky.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,32 +40,127 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="vector.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/geometry/vector.py">
+      <file leaf-file-name="renderer.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/graphics/renderer/renderer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
-              <caret line="45" column="8" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="8" />
-              <folding />
+            <state relative-caret-position="488">
+              <caret line="89" column="27" selection-start-line="89" selection-start-column="27" selection-end-line="89" selection-end-column="27" />
+              <folding>
+                <marker date="1479778727219" expanded="false" signature="0:7" ph="import ..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="avector.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/geometry/avector.py">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/graphics/renderer/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="187">
+              <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+                <marker date="1479734204809" expanded="true" signature="222:919" ph="..." />
+                <marker date="1479734204809" expanded="true" signature="818:822" ph="..." />
+                <marker date="1479734204809" expanded="true" signature="952:965" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sky_math.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="sky_math.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/geometry/sky_math.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="33" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="33" />
-              <folding />
+            <state relative-caret-position="202">
+              <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="watcher.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/graphics/renderer/watcher.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="573">
+              <caret line="36" column="82" selection-start-line="36" selection-start-column="82" selection-end-line="36" selection-end-column="82" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="field_item.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/graphics/autogui/field_item.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="202">
+              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="text_item.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/graphics/autogui/text_item.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="471">
+              <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gui.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/graphics/autogui/gui.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="386">
+              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="program.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/program.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+              <folding>
+                <element signature="e#60#75#0" expanded="true" />
+                <marker date="1479776779433" expanded="true" signature="416:460" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="crenderer.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/graphics/crenderer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="267">
+              <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+                <marker date="1479778784328" expanded="false" signature="0:7" ph="import ..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="image_viewer.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/graphics/image_viewer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="26" column="31" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#30#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -84,9 +181,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/PyStars/Observer.py" />
-        <option value="$PROJECT_DIR$/vectors/fequatorial.py" />
-        <option value="$PROJECT_DIR$/vectors/equatorial.py" />
         <option value="$PROJECT_DIR$/vectors/horizontal.py" />
         <option value="$PROJECT_DIR$/vectors/star.py" />
         <option value="$PROJECT_DIR$/impl/star.py" />
@@ -103,15 +197,11 @@
         <option value="$PROJECT_DIR$/graphics/qgraphic.py" />
         <option value="$PROJECT_DIR$/graphics/renderer/geometry.py" />
         <option value="$PROJECT_DIR$/graphics/renderer/myrenderer.py" />
-        <option value="$PROJECT_DIR$/stars/parser.py" />
         <option value="$PROJECT_DIR$/geometry/point.py" />
         <option value="$PROJECT_DIR$/graphics/renderer/_geometry.py" />
         <option value="$PROJECT_DIR$/geometry/equatorial.py" />
         <option value="$PROJECT_DIR$/geometry/vector.py" />
         <option value="$PROJECT_DIR$/stars/star.py" />
-        <option value="$PROJECT_DIR$/graphics/renderer/camera.py" />
-        <option value="$PROJECT_DIR$/graphics/qgraphics.py" />
-        <option value="$PROJECT_DIR$/graphics/renderer/renderer.py" />
         <option value="$PROJECT_DIR$/stars/skybase.py" />
         <option value="$PROJECT_DIR$/graphics/renderer/ui.py" />
         <option value="$PROJECT_DIR$/graphics/renderer/autoui.py" />
@@ -121,7 +211,6 @@
         <option value="$PROJECT_DIR$/graphics/autogui/num_item.py" />
         <option value="$PROJECT_DIR$/graphics/autogui/num_items.py" />
         <option value="$PROJECT_DIR$/graphics/autogui/field_items.py" />
-        <option value="$PROJECT_DIR$/program.py" />
         <option value="$PROJECT_DIR$/graphics/autogui/label.py" />
         <option value="$PROJECT_DIR$/graphics/autogui/object_ui.py" />
         <option value="$PROJECT_DIR$/graphics/autogui/object_text_item.py" />
@@ -132,9 +221,17 @@
         <option value="$PROJECT_DIR$/graphics/autogui/bool_item.py" />
         <option value="$PROJECT_DIR$/graphics/autogui/item.py" />
         <option value="$PROJECT_DIR$/graphics/autogui/set_item.py" />
-        <option value="$PROJECT_DIR$/graphics/renderer/crenderer.py" />
-        <option value="$PROJECT_DIR$/geometry/sky_math.py" />
         <option value="$PROJECT_DIR$/geometry/avector.py" />
+        <option value="$PROJECT_DIR$/stars/parser.py" />
+        <option value="$PROJECT_DIR$/graphics/renderer/camera.py" />
+        <option value="$PROJECT_DIR$/program.py" />
+        <option value="$PROJECT_DIR$/graphics/qgraphics.py" />
+        <option value="$PROJECT_DIR$/geometry/sky_math.py" />
+        <option value="$PROJECT_DIR$/graphics/renderer/watcher.py" />
+        <option value="$PROJECT_DIR$/graphics/renderer/crenderer.py" />
+        <option value="$PROJECT_DIR$/graphics/renderer/renderer.py" />
+        <option value="$PROJECT_DIR$/graphics/image_viewer.py" />
+        <option value="$PROJECT_DIR$/graphics/crenderer.py" />
       </list>
     </option>
   </component>
@@ -203,6 +300,34 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="stars" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pysky" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pysky" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="graphics" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pysky" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pysky" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="geometry" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -222,19 +347,19 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/Anton Tolstov/GitHub/pysky/graphics/renderer/camera.py&#10;re&#9;FILE&#9;file://C:/Users/Anton Tolstov/GitHub/pysky/graphics/renderer.py" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Anton Tolstov\GitHub\pysky\graphics" />
+      <recent name="C:\Users\Anton Tolstov\GitHub\pysky\graphics\renderer" />
+      <recent name="C:\Users\Anton Tolstov\GitHub\pysky" />
+      <recent name="C:\Users\Anton Tolstov\GitHub\pysky\impl\stars" />
+      <recent name="C:\Users\Anton Tolstov\GitHub\pysky\impl\geometry" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Anton Tolstov\GitHub\pysky\impl" />
       <recent name="C:\Users\Anton Tolstov\GitHub\pysky\impl\stars" />
       <recent name="C:\Users\Anton Tolstov\GitHub\pysky\SPY" />
       <recent name="C:\Users\Anton Tolstov\GitHub\pysky\tests\vectors\system_conversation" />
       <recent name="C:\Users\anaym_000\Documents\GitHub\pysky\tests\vectors" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Anton Tolstov\GitHub\pysky\graphics\renderer" />
-      <recent name="C:\Users\Anton Tolstov\GitHub\pysky" />
-      <recent name="C:\Users\Anton Tolstov\GitHub\pysky\impl\stars" />
-      <recent name="C:\Users\Anton Tolstov\GitHub\pysky\impl\geometry" />
-      <recent name="C:\Users\Anton Tolstov\GitHub\pysky\impl\graphics" />
     </key>
   </component>
   <component name="RunManager" selected="Python.program (1)">
@@ -571,27 +696,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
     </layout>
-    <layout-to-restore>
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32912722" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32912722" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3322818" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32970452" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.08166491" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3228181" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45425868" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -613,24 +717,16 @@
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/graphics/renderer/crenderer.py</url>
-          <line>25</line>
+          <url>file://$PROJECT_DIR$/graphics/crenderer.py</url>
+          <line>29</line>
           <option name="timeStamp" value="57" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="71" />
+      <option name="time" value="72" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/graphics/sphere.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python35/Lib/site-packages/OpenGL/GL/exceptional.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="205" column="4" selection-start-line="205" selection-start-column="4" selection-end-line="205" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/graphics/sphere.py" />
     <entry file="file://$PROJECT_DIR$/graphics/__old.txt" />
     <entry file="file://$PROJECT_DIR$/vectors/svector.py" />
@@ -643,13 +739,11 @@
         <state relative-caret-position="442">
           <caret line="29" column="58" selection-start-line="29" selection-start-column="58" selection-end-line="29" selection-end-column="58" />
           <folding>
-            <element signature="e#0#15#0" expanded="false" />
-            <marker date="1479698274464" expanded="true" signature="86:639" ph="..." />
-            <marker date="1479698274464" expanded="true" signature="158:169" ph="..." />
-            <marker date="1479698274464" expanded="true" signature="1541:1543" ph="..." />
-            <marker date="1479698274464" expanded="true" signature="1723:1734" ph="..." />
-            <marker date="1479698274464" expanded="true" signature="2211:2229" ph="..." />
-            <marker date="1479698274464" expanded="true" signature="2472:2490" ph="..." />
+            <element signature="e#0#15#0" expanded="true" />
+            <marker date="1479775681452" expanded="true" signature="265:652" ph="..." />
+            <marker date="1479775681452" expanded="true" signature="316:327" ph="..." />
+            <marker date="1479775681452" expanded="true" signature="1204:1206" ph="..." />
+            <marker date="1479775681452" expanded="true" signature="1386:1397" ph="..." />
           </folding>
         </state>
       </provider>
@@ -660,7 +754,7 @@
         <state relative-caret-position="850">
           <caret line="58" column="21" selection-start-line="58" selection-start-column="21" selection-end-line="58" selection-end-column="21" />
           <folding>
-            <marker date="1479720793643" expanded="false" signature="0:7" ph="import ..." />
+            <marker date="1479778727219" expanded="false" signature="0:7" ph="import ..." />
           </folding>
         </state>
       </provider>
@@ -698,7 +792,7 @@
         <state relative-caret-position="867">
           <caret line="93" column="37" selection-start-line="93" selection-start-column="16" selection-end-line="93" selection-end-column="37" />
           <folding>
-            <marker date="1479720793643" expanded="false" signature="0:7" ph="import ..." />
+            <marker date="1479778727219" expanded="false" signature="0:7" ph="import ..." />
           </folding>
         </state>
       </provider>
@@ -734,34 +828,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stars/parser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding>
-            <marker date="1479696819723" expanded="true" signature="201:1125" ph="..." />
-            <marker date="1479696819723" expanded="true" signature="894:898" ph="..." />
-            <marker date="1479696819723" expanded="true" signature="1161:1180" ph="..." />
-            <marker date="1479696819723" expanded="true" signature="1495:1514" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphics/renderer/autoui.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="40" column="42" selection-start-line="40" selection-start-column="42" selection-end-line="40" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphics/qgraphics.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/stars/skybase.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -774,7 +840,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -783,56 +848,13 @@
         <state relative-caret-position="136">
           <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
           <folding>
-            <element signature="e#0#34#0" expanded="true" />
+            <element signature="e#0#34#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphics/autogui/object_text_item.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="31" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphics/renderer/camera.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#15#0" expanded="false" />
-            <marker date="1479698274464" expanded="true" signature="86:639" ph="..." />
-            <marker date="1479698274464" expanded="true" signature="158:169" ph="..." />
-            <marker date="1479698274464" expanded="true" signature="1541:1543" ph="..." />
-            <marker date="1479698274464" expanded="true" signature="1723:1734" ph="..." />
-            <marker date="1479698274464" expanded="true" signature="2211:2229" ph="..." />
-            <marker date="1479698274464" expanded="true" signature="2472:2490" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphics/renderer/ui.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="471">
-          <caret line="41" column="51" selection-start-line="40" selection-start-column="4" selection-end-line="41" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphics/renderer/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="41" column="20" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <marker date="1479734204809" expanded="true" signature="222:919" ph="..." />
-            <marker date="1479734204809" expanded="true" signature="818:822" ph="..." />
-            <marker date="1479734204809" expanded="true" signature="952:965" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/graphics/autogui/object_text_item.py" />
+    <entry file="file://$PROJECT_DIR$/graphics/renderer/ui.py" />
     <entry file="file://$PROJECT_DIR$/graphics/autogui/bool_item.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
@@ -851,26 +873,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphics/autogui/text_item.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="43" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphics/autogui/field_item.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/graphics/autogui/set_item.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="566">
@@ -881,48 +883,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/program.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding>
-            <element signature="e#60#75#0" expanded="true" />
-            <marker date="1479723717035" expanded="true" signature="358:402" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphics/renderer/crenderer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1127">
-          <caret line="125" column="22" selection-start-line="125" selection-start-column="22" selection-end-line="125" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-            <marker date="1479737454996" expanded="false" signature="0:7" ph="import ..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphics/renderer/renderer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="20" column="35" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
-          <folding>
-            <marker date="1479720793643" expanded="false" signature="0:7" ph="import ..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphics/autogui/gui.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="21" column="29" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/graphics/renderer/autoui.py" />
     <entry file="file://$PROJECT_DIR$/geometry/vector.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="731">
@@ -933,17 +894,151 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/geometry/avector.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+        <state relative-caret-position="425">
+          <caret line="29" column="61" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="61" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stars/parser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
+          <folding>
+            <marker date="1479743380060" expanded="true" signature="275:1199" ph="..." />
+            <marker date="1479743380060" expanded="true" signature="968:972" ph="..." />
+            <marker date="1479743380060" expanded="true" signature="1235:1254" ph="..." />
+            <marker date="1479743380060" expanded="true" signature="1569:1588" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphics/renderer/camera.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="12" column="63" selection-start-line="12" selection-start-column="63" selection-end-line="12" selection-end-column="63" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+            <marker date="1479775681452" expanded="true" signature="265:652" ph="..." />
+            <marker date="1479775681452" expanded="true" signature="316:327" ph="..." />
+            <marker date="1479775681452" expanded="true" signature="1204:1206" ph="..." />
+            <marker date="1479775681452" expanded="true" signature="1386:1397" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphics/qgraphics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="13" column="35" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
+          <folding>
+            <marker date="1479778482518" expanded="false" signature="0:160" ph="import ..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/geometry/sky_math.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="33" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="33" />
-          <folding />
+        <state relative-caret-position="202">
+          <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphics/autogui/field_item.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphics/autogui/text_item.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="471">
+          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphics/autogui/gui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphics/renderer/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <marker date="1479734204809" expanded="true" signature="222:919" ph="..." />
+            <marker date="1479734204809" expanded="true" signature="818:822" ph="..." />
+            <marker date="1479734204809" expanded="true" signature="952:965" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/program.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding>
+            <element signature="e#60#75#0" expanded="true" />
+            <marker date="1479776779433" expanded="true" signature="416:460" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphics/renderer/watcher.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="573">
+          <caret line="36" column="82" selection-start-line="36" selection-start-column="82" selection-end-line="36" selection-end-column="82" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphics/renderer/renderer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="488">
+          <caret line="89" column="27" selection-start-line="89" selection-start-column="27" selection-end-line="89" selection-end-column="27" />
+          <folding>
+            <marker date="1479778727219" expanded="false" signature="0:7" ph="import ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphics/image_viewer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="31" selection-start-line="26" selection-start-column="31" selection-end-line="26" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphics/crenderer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+            <marker date="1479778784328" expanded="false" signature="0:7" ph="import ..." />
+          </folding>
         </state>
       </provider>
     </entry>
