@@ -2,7 +2,8 @@ import datetime
 import os
 from PyQt5 import QtWidgets
 from geometry.horizontal import Horizontal
-from graphics.qt_stars import QtStars
+from graphics.key_controllable_sky import KeyControllableSky
+from graphics.sky import Sky
 from graphics.renderer.camera import Camera
 from graphics.renderer.watcher import Watcher
 from stars.parser import TxtDataBaseParser
@@ -27,7 +28,7 @@ def main():
     watcher = Watcher(Horizontal(59, 53), datetime.datetime.now(), camera)
 
     app = QtWidgets.QApplication([])
-    QtStars(watcher, sky_base).show()
+    KeyControllableSky(watcher, sky_base).show()
     app.exec()
 
 if __name__ == '__main__':
