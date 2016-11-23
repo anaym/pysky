@@ -22,10 +22,18 @@ def get_all_lines_in_dir(path: str, ext: str):
                 yield (line, fn)
 
 
+class City(Horizontal):
+    def __init__(self, широта, долгота):
+        super().__init__(долгота, широта)
+
+
+MAGNITOGORSK = City(53, 59)
+
+
 def main():
     sky_base = TxtDataBaseParser().parse(get_all_lines_in_dir(r'stars\stars\txt', '.txt'))
     camera = Camera(Horizontal(0, 89), 60)
-    watcher = Watcher(Horizontal(59, 53), datetime.datetime.now(), camera)
+    watcher = Watcher(MAGNITOGORSK, datetime.datetime.now(), camera)
 
     app = QtWidgets.QApplication([])
     KeyControllableSky(watcher, sky_base).show()

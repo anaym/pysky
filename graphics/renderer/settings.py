@@ -3,10 +3,8 @@ from PyQt5.QtGui import QBrush
 from PyQt5.QtGui import QColor
 from PyQt5.QtGui import QPainter
 from PyQt5.QtGui import QPen
+from stars.sky_math import sign
 
-
-def sign(n):
-    return -1 if n < 0 else (0 if n == 0 else 1)
 
 class RenderSettings:
     def __init__(self):

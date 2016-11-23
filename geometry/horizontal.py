@@ -9,7 +9,7 @@ class Horizontal(NVector):
     def star_compatible(a, d):
         return Horizontal((a + 360) % 360, d)
 
-    def __init__(self, a, d):
+    def __init__(self, a, d): #TODO: все брать по модулю 360 и в -90 до 90 по умолчанию!!!!
         super().__init__((a, d))
 
     def to_point(self, radius=1) -> Vector:

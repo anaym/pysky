@@ -1,8 +1,5 @@
 import datetime
-
 from graphics.autogui.text_item import TextItem
-
-
 
 
 def get_attribute(obj, fname):
@@ -17,7 +14,6 @@ def set_attribute(obj, fname, value):
     for part in fname.split('.')[:-1]:
         current = current.__getattribute__(part)
     current.__setattr__(fname.split('.')[-1], value)
-
 
 
 class FieldItem(TextItem):

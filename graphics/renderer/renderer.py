@@ -1,16 +1,14 @@
 from PyQt5.QtCore import QSize
 from PyQt5.QtGui import QImage
 from PyQt5.QtGui import QPainter
-
 from geometry.horizontal import Horizontal
-from geometry.equatorial import Equatorial
 from graphics.renderer.settings import RenderSettings
 from graphics.renderer.watcher import Watcher
 from stars.star import Star
 
 
 def fisheye_distortion(x, y, radius, z):
-    r = radius * 10 / (1 - abs(z)) ** 2 # z преобразование для эффект рыбъего глаза
+    r = radius * 10 / (1 - abs(z)) ** 2
     return x*r, y*r
 
 
@@ -65,15 +63,15 @@ class Renderer:
         return self._buffer
 
     def _apply_time_rotation(self, star: Star):
-        return star.position.to_horizontal_system(self.watcher.position.h, self.watcher.star_time.total_degree % 360)
+        return star.position.to_horizontal_system(self.watcher.star_time.total_degree % 360, self.watcher.position.h)
 
     def _draw_object(self, pos: Horizontal, p):
-        diameter = 0.01
-        delta = pos.to_point() - self.watcher.see.to_point()
-        prj_delta = delta.rmul_to_matrix(self.watcher.transformation_matrix)
-        if self.watcher.see.angle_to(pos) <= self.watcher.eye_radius:
-            dx, dy = self._distortion(prj_delta.x, prj_delta.y, self.watcher.eye_radius, prj_delta.z)
-            diameter, _ = self._distortion(diameter, 0, self.watcher.eye_radius, prj_delta.z)
+        diameter = 0.005
+        if self.watcher.see.angle_to(pos) <= self.watcher.radius:
+            delta = pos.to_point() - self.watcher.see.to_point()
+            prj_delta = delta.rmul_to_matrix(self.watcher.transformation_matrix)
+            dx, dy = self._distortion(prj_delta.x, prj_delta.y, self.watcher.radius, prj_delta.z)
+            diameter, _ = self._distortion(diameter, 0, self.watcher.radius, prj_delta.z)
             cx, cy = self._width//2 + dx, self._height//2 + dy
             x, y = cx - diameter//2, cy - diameter//2
             p.drawEllipse(x, y, diameter, diameter)

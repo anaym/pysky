@@ -6,7 +6,7 @@ from stars.star_time import StarTime
 
 class Watcher(Camera):
     def __init__(self, position: Horizontal, local_time: datetime, camera: Camera):
-        super().__init__(camera.see, camera.eye_radius)
+        super().__init__(camera.see, camera.radius)
         self._position = position
         self._local_time = local_time
         self._star_time = StarTime.from_local(position.a, local_time)
@@ -30,6 +30,7 @@ class Watcher(Camera):
 
     @position.setter
     def position(self, value: Horizontal):
-        self._position = Horizontal(value.a % 360, min(90, max(-90, value.h)))
+        h = value.h if 90 <= value.h <= -90 else (90 if value.h > 0 else -90)
+        self._position = Horizontal(value.a % 360, h)
         self._star_time = StarTime.from_local(self.position.a, self.local_time)
 

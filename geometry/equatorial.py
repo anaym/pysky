@@ -8,14 +8,11 @@ class Equatorial(NVector):
     def __init__(self, a, d):
         super().__init__((a, d))
 
-    def apply_time(self, star_time):
-        return Equatorial(self.a + star_time, self.d)
-
-    def to_horizontal_system(self, latitude, star_time_degree):
-        timed = self.apply_time(star_time_degree)
+    def to_horizontal_system(self, star_time_degree, h):
+        timed = Equatorial(self.a + star_time_degree, self.d)
         d = math.radians(timed.d)
         t = math.radians(timed.a)
-        f = math.radians(latitude)
+        f = math.radians(h)
 
         cosz = FirstEquatorialToHorizontal.cosz(f, d, t)
         sina_sinz = FirstEquatorialToHorizontal.siza_sinz(d, t)

@@ -22,11 +22,11 @@ class Camera:
         self._transformation_matrix = numpy.array([list(self._ox_vector), list(self._oy), list(self._see.to_point())])
 
     @property
-    def eye_radius(self):
+    def radius(self):
         return self._radius
 
-    @eye_radius.setter
-    def eye_radius(self, radius):
+    @radius.setter
+    def radius(self, radius):
         self._radius = radius
 
     @property

@@ -27,7 +27,7 @@ class KeyControllableSky(ControllableSky):
             .register("menu", self._switch_menu) \
             .bind(Qt.Key_M, 'menu') \
             .register("image", self.viewer.save_to_file) \
-            .bind(Qt.Key_I, "image", ("stars.jpg",)) \
+            .bind(Qt.Key_I, "image") \
             .register("full_screen", self._switch_full_screen) \
             .bind(Qt.Key_F, "full_screen") \
             .register("exit", lambda: sys.exit(0))\
