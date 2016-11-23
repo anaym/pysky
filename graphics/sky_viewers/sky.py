@@ -1,14 +1,16 @@
 import datetime
+
 from PyQt5 import QtCore
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtWidgets import QWidget
+
 from graphics.autogui.cast_tools import to_widget
-from graphics.image_viewer import ImageViewer
-from graphics.utility import profile
 from graphics.renderer.renderer import Renderer
 from graphics.renderer.settings import ControllableRenderSettings
 from graphics.renderer.watcher import Watcher
+from graphics.sky_viewers.image_viewer import ImageViewer
+from graphics.sky_viewers.utility import profile
 from stars.skydatabase import SkyDataBase
 
 

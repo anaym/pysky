@@ -1,5 +1,4 @@
 import numpy
-
 from geometry.horizontal import Horizontal
 
 

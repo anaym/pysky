@@ -1,10 +1,12 @@
 import datetime
 import os
+
 from PyQt5 import QtWidgets
+
 from geometry.horizontal import Horizontal
-from graphics.key_controllable_sky import KeyControllableSky
 from graphics.renderer.camera import Camera
 from graphics.renderer.watcher import Watcher
+from graphics.sky_viewers.key_controllable_sky import KeyControllableSky
 from stars.parser import TxtDataBaseParser
 
 
