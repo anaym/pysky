@@ -1,8 +1,6 @@
 import datetime
 import os
-
 from PyQt5 import QtWidgets
-
 from geometry.horizontal import Horizontal
 from graphics.renderer.camera import Camera
 from graphics.renderer.watcher import Watcher
@@ -38,7 +36,7 @@ def main():
     watcher = Watcher(MAGNITOGORSK, datetime.datetime.now(), camera)
 
     app = QtWidgets.QApplication([])
-    KeyControllableSky(watcher, sky_base).show()
+    KeyControllableSky(watcher, sky_base) # TODO: check Sky
     app.exec()
 
 if __name__ == '__main__':

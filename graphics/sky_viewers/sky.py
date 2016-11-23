@@ -33,6 +33,8 @@ class Sky(QMainWindow):
         self._rerender()
         self._timer.start()
 
+        self.setVisible(True)
+
     def _create_ui(self):
         main = QtWidgets.QGridLayout()
         main.setContentsMargins(0, 0, 0, 0)
