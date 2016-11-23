@@ -9,9 +9,7 @@ from geometry.horizontal import Horizontal
 class Camera:
     def __init__(self, see: Horizontal, radius):
         self._radius = radius
-        self._see = Horizontal(see.a, see.h)
-        if see.h == 90 or see.h == -90:
-            see.h += 1e-9
+        self._see = see
         self._up_rotation = 0
         self._oy = Horizontal(0, 0)
         self._update()
@@ -39,8 +37,7 @@ class Camera:
 
     @see.setter
     def see(self, value: Horizontal):
-        #TODO: подозрительно
-        self._see = Horizontal(value.a % 360, min(max(value.h, -90 + 1e-9), 90 - 1e-9))
+        self._see = Horizontal(value.a, value.h)
         self._update()
 
     @property

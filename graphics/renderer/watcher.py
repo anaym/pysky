@@ -30,7 +30,6 @@ class Watcher(Camera):
 
     @position.setter
     def position(self, value: Horizontal):
-        h = value.h if 90 <= value.h <= -90 else (90 if value.h > 0 else -90)
-        self._position = Horizontal(value.a % 360, h)
+        self._position = value
         self._star_time = StarTime.from_local(self.position.a, self.local_time)
 

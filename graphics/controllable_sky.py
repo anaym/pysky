@@ -16,12 +16,13 @@ class ControllableSky(Sky):
         gui = GUI("CONFIGURATOR")
 
         camera = gui.add(GUI("CAMERA"))
-        camera.add(HorizontalItem(watcher, "position"))
-        camera.add(HorizontalItem(watcher, "see"))
-        camera.add(FloatItem(watcher, "up_rotation"))
+        camera.add(HorizontalItem(self._renderer.watcher, "position"))
+        camera.add(HorizontalItem(self._renderer.watcher, "see"))
+        camera.add(FloatItem(self._renderer.watcher, "up_rotation"))
 
         time = gui.add(GUI("DATE & TIME"))
-        time.add(DateTimeItem(watcher, "local_time"))
+        time.add(DateTimeItem(self._renderer.watcher, "local_time"))
+        time.add(FloatItem(self._renderer.watcher, "star_time", True))
         time.add(FloatItem(self.settings, "speed"))
         time.add(FloatItem(self.settings, "speed_rank"))
 

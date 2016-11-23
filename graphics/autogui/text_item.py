@@ -6,7 +6,7 @@ from graphics.autogui.label import Label
 
 
 class TextItem(Item):
-    def __init__(self, name: str, setter, getter):
+    def __init__(self, name: str, setter, getter, ro: bool):
         super().__init__()
         self._setter = setter
         self._getter = getter
@@ -18,6 +18,7 @@ class TextItem(Item):
         self.addWidget(self._widget, 0, 1)
         self.setSpacing(1)
         self._widget.returnPressed.connect(self._inverse_editing)
+        self._widget.setReadOnly(ro)
 
     def _inverse_editing(self):
         self._edit_mode = not self._edit_mode

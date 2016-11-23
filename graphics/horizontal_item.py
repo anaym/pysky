@@ -19,9 +19,9 @@ class HorizontalItem(FieldItem):
         print(groups["a"], groups["d"])
         return Horizontal(float(groups["a"]), float(groups["d"]))
 
-    def __init__(self, obj: object, fname: str):
+    def __init__(self, obj: object, fname: str, ro: bool=False):
         pregex = "^\(?(?P<a>[+-]?[\d.]+?), ?(?P<d>[+-]?[\d.]+?)\)?$"
         cpregexp = re.compile(pregex)
         builder = str
         parser = lambda s: HorizontalItem.parse_str(s, cpregexp)
-        super().__init__(obj, fname, builder, parser)
+        super().__init__(obj, fname, builder, parser, ro)
