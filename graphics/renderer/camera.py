@@ -3,13 +3,10 @@ import numpy
 from geometry.horizontal import Horizontal
 
 
-#TODO: rename see to see
-#TODO: sight radius - wtf?
-
 class Camera:
     def __init__(self, see: Horizontal, radius):
-        self._radius = radius
         self._see = see
+        self._radius = radius
         self._up_rotation = 0
         self._oy = Horizontal(0, 0)
         self._update()

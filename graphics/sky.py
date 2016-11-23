@@ -15,7 +15,6 @@ from stars.skydatabase import SkyDataBase
 class Sky(QMainWindow):
     def __init__(self, watcher: Watcher, sky_base: SkyDataBase):
         super().__init__()
-
         self._renderer = Renderer(watcher)
         self.settings = ControllableRenderSettings()
 
@@ -23,13 +22,12 @@ class Sky(QMainWindow):
         self._objects = []
         self._sky_sphere = sky_base
 
-        self._timer = QtCore.QTimer(self)
-        self._timer.setInterval(33)
-        self._timer.timeout.connect(self._rerender)
-
         self._create_ui()
         self.setFocus()
 
+        self._timer = QtCore.QTimer(self)
+        self._timer.timeout.connect(self._rerender)
+        self._timer.setInterval(33)
         self._rerender()
         self._timer.start()
 
@@ -43,7 +41,7 @@ class Sky(QMainWindow):
 
         self._main = main
 
-        self.setWindowTitle("Sky")
+        self.setWindowTitle("Sky: Powered by Anton Tolstov (aka anaym), atolstov.com, 2016")
         self.resize(1000, 700)
         self.setCentralWidget(to_widget(main))
         self.show()
@@ -61,9 +59,16 @@ class Sky(QMainWindow):
     def _rerender(self, exec_delta: datetime.timedelta):
         if exec_delta is None:
             return
-        datetime.timedelta(0, 0, )
-        self._renderer.watcher.local_time = self._renderer.watcher.local_time + datetime.timedelta(0, 0, exec_delta.microseconds * self.settings.speed)
+        self._renderer.watcher.local_time += exec_delta*self.settings.second_per_second
         self._update_image()
 
     def mousePressEvent(self, QMouseEvent):
         self.setFocus()
+
+    @property
+    def delay(self):
+        return self._timer.interval()
+
+    @delay.setter
+    def delay(self, value):
+        self._timer.setInterval(value)

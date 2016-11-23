@@ -1,5 +1,4 @@
 import math
-
 from geometry.angle_helpers import to_0_360, to_cos_period_cutted, apply
 from geometry.horizontal import Horizontal
 from geometry.nvector import NVector

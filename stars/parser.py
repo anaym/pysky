@@ -5,12 +5,7 @@ from geometry.equatorial import Equatorial
 from stars.skydatabase import SkyDataBase
 from stars.star import Star
 
-# TODO: change regexpes!!!
-# TODO: rename static methods!!!
-# TODO: make refactoring
 
-# Alf: [0; 23] : [0; 59] : [0; 59] - time : hours : minutes : seconds
-# Del: [-90; 90] : [0; 59] : [0; 59] - degree : degree minutes : degree seconds
 def num_regexp(name: str):
     return r"(?P<{}>[\+-]? *?[\d\.]+)".format(name)
 
@@ -34,6 +29,10 @@ def extract_nums(parsed, name: str, count: int):
     return nums
 
 
+# Alf: [0; 23] : [0; 59] : [0; 59] - time : hours : minutes : seconds
+# Del: [-90; 90] : [0; 59] : [0; 59] - degree : degree minutes : degree seconds
+
+
 class TxtDataBaseParser:
     def __init__(self):
         map_re = r"^ *?{} *?".format(num_regexp("map"))
@@ -53,4 +52,4 @@ class TxtDataBaseParser:
             d = dtime_to_degree(d_d, d_m, d_s)
             return Star(Equatorial(a, d), pair[1])
         except Exception as ex:
-            print(ex)
+            pass

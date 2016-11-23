@@ -12,15 +12,15 @@ class FirstEquatorialToHorizontal:
 
     @staticmethod
     def cosz(f, d, t):
-        return sin(f) * sin(d) + cos(d) * cos(f) * cos(t)
+        return sin(f)*sin(d) + cos(d)*cos(f)*cos(t)
 
     @staticmethod
     def siza_sinz(d, t):
-        return cos(d) * sin(t)
+        return cos(d)*sin(t)
 
     @staticmethod
     def cosa_sinz(f, d, t):
-        return -cos(f) * sin(d) + sin(f) * cos(d) * cos(t)
+        return -cos(f)*sin(d) + sin(f)*cos(d)*cos(t)
 
 
 class StarTimeHelper:

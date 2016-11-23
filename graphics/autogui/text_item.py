@@ -2,11 +2,15 @@ from PyQt5.QtWidgets import QLabel
 from PyQt5.QtWidgets import QLineEdit
 
 from graphics.autogui.item import Item
-from graphics.autogui.label import Label
+from graphics.autogui.label_item import LabelItem
+
+
+def camel_case_to_normal(s: str):
+    return s.replace('_', ' ')
 
 
 class TextItem(Item):
-    def __init__(self, name: str, setter, getter, ro: bool):
+    def __init__(self, name: str, setter, getter, ro: bool, label: str = None):
         super().__init__()
         self._setter = setter
         self._getter = getter
@@ -14,7 +18,8 @@ class TextItem(Item):
         self._widget = QLineEdit()
         self._edit_mode = False
         self._apply_edit = False
-        self.addWidget(QLabel(name), 0, 0)
+        label = label if not label is None else camel_case_to_normal(name)
+        self.addWidget(QLabel(label), 0, 0)
         self.addWidget(self._widget, 0, 1)
         self.setSpacing(1)
         self._widget.returnPressed.connect(self._inverse_editing)

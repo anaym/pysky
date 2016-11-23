@@ -51,21 +51,21 @@ class Renderer:
         self._distortion = fisheye_distortion if self.settings.fisheye else scale_distortion
 
         self._painter.begin(self._buffer)
-        self._draw_background(self._painter)
+        self._draw_background()
         self.settings.apply_color("star", self._painter)
         for o in (self._apply_time_rotation(s) for s in stars):
-            self._draw_object(o, self._painter)
+            self._draw_object(o)
         self.settings.apply_color("up", self._painter)
-        self._draw_object(Horizontal(0, 90), self._painter)
-        self.settings.apply_color("down", self._painter) #TODO: what is it? Повторить отображения координат
-        self._draw_object(Horizontal(0, -90), self._painter)
+        self._draw_object(Horizontal(0, 90))
+        self.settings.apply_color("down", self._painter)
+        self._draw_object(Horizontal(0, -90))
         self._painter.end()
         return self._buffer
 
     def _apply_time_rotation(self, star: Star):
         return star.position.to_horizontal_system(self.watcher.star_time.total_degree % 360, self.watcher.position.h)
 
-    def _draw_object(self, pos: Horizontal, p):
+    def _draw_object(self, pos: Horizontal):
         diameter = 0.005
         if self.watcher.see.angle_to(pos) <= self.watcher.radius:
             delta = pos.to_point() - self.watcher.see.to_point()
@@ -74,9 +74,9 @@ class Renderer:
             diameter, _ = self._distortion(diameter, 0, self.watcher.radius, prj_delta.z)
             cx, cy = self._width//2 + dx, self._height//2 + dy
             x, y = cx - diameter//2, cy - diameter//2
-            p.drawEllipse(x, y, diameter, diameter)
+            self._painter.drawEllipse(x, y, diameter, diameter)
 
-    def _draw_background(self, p):
-        self.settings.apply_color("sky", p)
-        p.drawRect(0, 0, self.width, self.height)
+    def _draw_background(self):
+        self.settings.apply_color("sky", self._painter)
+        self._painter.drawRect(0, 0, self.width, self.height)
 

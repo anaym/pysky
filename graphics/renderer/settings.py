@@ -32,17 +32,17 @@ class RenderSettings:
 
 class ControllableRenderSettings:
     def __init__(self):
-        self.speed = 1
+        self.second_per_second = 1
         self.zoom = 1
 
     @property
     def speed_rank(self):
-        if self.speed == 0:
+        if self.second_per_second == 0:
             return 0
-        return (math.log10(abs(self.speed)) + 1)*sign(self.speed)
+        return (math.log10(abs(self.second_per_second)) + 1) * sign(self.second_per_second)
 
     @speed_rank.setter
     def speed_rank(self, value):
         if value > 10:
             raise ValueError()
-        self.speed = 10**(abs(value) - 1)*sign(value)
+        self.second_per_second = 10 ** (abs(value) - 1) * sign(value)

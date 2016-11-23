@@ -1,7 +1,8 @@
 from graphics.autogui.action_item import ActionItem
 from graphics.autogui.bool_item import BoolItem
-from graphics.autogui.field_item import FloatItem, DateTimeItem
+from graphics.autogui.field_item import FloatItem, DateTimeItem, IntItem
 from graphics.autogui.gui import GUI
+from graphics.autogui.label_item import LabelItem
 from graphics.autogui.set_item import CheckBoxSet
 from graphics.horizontal_item import HorizontalItem
 from graphics.renderer.watcher import Watcher
@@ -16,15 +17,16 @@ class ControllableSky(Sky):
         gui = GUI("CONFIGURATOR")
 
         camera = gui.add(GUI("CAMERA"))
-        camera.add(HorizontalItem(self._renderer.watcher, "position"))
+        camera.add(HorizontalItem(self._renderer.watcher, "position", label="(долгота, широта)"))
         camera.add(HorizontalItem(self._renderer.watcher, "see"))
         camera.add(FloatItem(self._renderer.watcher, "up_rotation"))
 
         time = gui.add(GUI("DATE & TIME"))
         time.add(DateTimeItem(self._renderer.watcher, "local_time"))
         time.add(FloatItem(self._renderer.watcher, "star_time", True))
-        time.add(FloatItem(self.settings, "speed"))
+        time.add(FloatItem(self.settings, "second_per_second"))
         time.add(FloatItem(self.settings, "speed_rank"))
+        time.add(IntItem(self, "delay"))
 
         other = gui.add(GUI("OTHER"))
         other.add(BoolItem(self._renderer.settings, "fisheye"))
@@ -41,8 +43,8 @@ class ControllableSky(Sky):
         selected = self._constellation_filter.selected
         self._apply_constellation_filter(selected)
 
-    def _apply_constellation_filter(self, slctd):
-        stars = self._sky_sphere.get_stars(slctd)
+    def _apply_constellation_filter(self, selected):
+        stars = self._sky_sphere.get_stars(selected)
         self._objects = stars
         self._update_image()
 

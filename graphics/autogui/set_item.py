@@ -1,8 +1,10 @@
 from PyQt5.QtGui import QStandardItem
 from PyQt5.QtGui import QStandardItemModel
+from PyQt5.QtWidgets import QGridLayout
 from PyQt5.QtWidgets import QListView
 from PyQt5.QtWidgets import QPushButton
 
+from graphics.autogui.cast_tools import to_widget
 from graphics.autogui.item import Item
 
 
@@ -34,12 +36,16 @@ class CheckBoxSet(Item):
         self.addWidget(self._widget)
 
     def _create_buttons(self):
+        buttons = QGridLayout()
+        buttons.setSpacing(0)
+        buttons.setContentsMargins(0, 0, 0, 0)
         bclear = QPushButton("none")
         bclear.clicked.connect(lambda: self._change_state_for_all(0))
-        self.addWidget(bclear)
+        buttons.addWidget(bclear, 0, 0)
         ball = QPushButton("all")
         ball.clicked.connect(lambda: self._change_state_for_all(2))
-        self.addWidget(ball)
+        buttons.addWidget(ball, 0, 1)
+        self.addWidget(to_widget(buttons))
 
     def _on_change(self):
         if self._lock:

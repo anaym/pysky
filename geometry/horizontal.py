@@ -6,7 +6,7 @@ from geometry.vector import Vector
 
 
 class Horizontal(NVector):
-    def __init__(self, a, h): #TODO: все брать по модулю 360 и в -90 до 90 по умолчанию!!!!
+    def __init__(self, a, h):
         super().__init__((to_0_360(a), to_cos_period_cutted(h)))
 
     def to_point(self, radius=1) -> Vector:
