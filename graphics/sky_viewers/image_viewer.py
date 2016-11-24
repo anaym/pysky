@@ -8,6 +8,7 @@ class ImageViewer(QWidget):
     def __init__(self):
         super().__init__()
         self._image = QImage(self.size(), QImage.Format_RGB32)
+        self.setMouseTracking(True)
 
     @property
     def image(self):
