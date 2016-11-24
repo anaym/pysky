@@ -1,6 +1,8 @@
 from PyQt5.QtCore import QSize
 from PyQt5.QtGui import QImage
 from PyQt5.QtGui import QPainter
+from math import sqrt, e, log, pi
+
 from geometry.horizontal import Horizontal
 from graphics.renderer.settings import RenderSettings
 from graphics.renderer.watcher import Watcher
@@ -54,19 +56,26 @@ class Renderer:
         self._draw_background()
         self.settings.apply_color("star", self._painter)
         for o in (self._apply_time_rotation(s) for s in stars):
-            self._draw_object(o)
+            self._draw_object(*o)
         self.settings.apply_color("up", self._painter)
-        self._draw_object(Horizontal(0, 90))
+        self._draw_object(Horizontal(0, 90), 0.005)
         self.settings.apply_color("down", self._painter)
-        self._draw_object(Horizontal(0, -90))
+        self._draw_object(Horizontal(0, -90), 0.005)
         self._painter.end()
         return self._buffer
 
-    def _apply_time_rotation(self, star: Star):
-        return star.position.to_horizontal_system(self.watcher.star_time.total_degree % 360, self.watcher.position.h)
+    def _get_size(self, mag):
+        magsize = e**(2*pi + mag*(log(2) - 1))
+        return max(1, magsize / self.watcher.radius)
 
-    def _draw_object(self, pos: Horizontal):
-        diameter = 0.005
+    def _apply_time_rotation(self, star: Star):
+        if self.settings.spectral:
+            self.settings.apply_color(star.spectral_class, self._painter)
+        mag = 0.005 if not self.settings.magnitude else self._get_size(star.magnitude)/500
+        return star.position.to_horizontal_system(self.watcher.star_time.total_degree % 360, self.watcher.position.h), mag
+
+    def _draw_object(self, pos: Horizontal, mag):
+        diameter = mag
         if self.watcher.see.angle_to(pos) <= self.watcher.radius:
             delta = pos.to_point() - self.watcher.see.to_point()
             prj_delta = delta.rmul_to_matrix(self.watcher.transformation_matrix)

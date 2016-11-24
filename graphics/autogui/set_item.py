@@ -33,7 +33,7 @@ class CheckBoxSet(Item):
 
         self._lock = False
         self._widget = view
-        self.addWidget(self._widget)
+        self.layout.addWidget(self._widget)
 
     def _create_buttons(self):
         buttons = QGridLayout()
@@ -45,7 +45,7 @@ class CheckBoxSet(Item):
         ball = QPushButton("all")
         ball.clicked.connect(lambda: self._change_state_for_all(2))
         buttons.addWidget(ball, 0, 1)
-        self.addWidget(to_widget(buttons))
+        self.layout.addWidget(to_widget(buttons))
 
     def _on_change(self):
         if self._lock:

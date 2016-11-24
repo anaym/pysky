@@ -1,25 +1,29 @@
 import datetime
 
 from geometry.equatorial import Equatorial
+from stars.filter import Filter
 from stars.star import Star
 
 
 class SkyDataBase:
     def __init__(self, stars):
-        self._stars = stars
-        self._constellations = {star.constellation: [] for star in stars}
+        consts = {star.constellation: [] for star in stars}
         for star in stars:
-            self._constellations[star.constellation].append(star)
+            consts[star.constellation].append(star)
+        self._constellations = {}
+        for cn in consts.keys():
+            self._constellations[cn] = tuple(consts[cn])
 
     @property
     def constellations(self):
         return self._constellations.keys()
 
-    def get_stars(self, available_constellations: set):
+    def get_stars(self, selection: Filter):
         stars = []
-        for constellation in available_constellations:
+        for constellation in selection.constellations:
             if not constellation in self._constellations:
                 continue
             for star in self._constellations[constellation]:
-                stars.append(star)
+                if selection.magnitude.is_include(star.magnitude):
+                    stars.append(star)
         return stars

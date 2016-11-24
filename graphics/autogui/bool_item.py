@@ -8,7 +8,7 @@ class BoolItem(Item):
     def __init__(self, obj: object, fname: str):
         super().__init__()
         self._widget = QCheckBox(fname)
-        self.addWidget(self._widget)
+        self.layout.addWidget(self._widget)
         self._buffer = None
         self._lock = False
         self._setter = lambda v: set_attribute(obj, fname, v)

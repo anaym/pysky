@@ -52,7 +52,7 @@ class NVector:
     def __hash__(self):
         h = 0
         for i in self:
-            h = h ^ i
+            h ^= hash(i)
         return h
 
     def __eq__(self, other):

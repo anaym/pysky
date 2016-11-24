@@ -1,9 +1,12 @@
 from PyQt5.QtWidgets import QGridLayout
+from PyQt5.QtWidgets import QGroupBox
 
 
-class Item(QGridLayout):
+class Item(QGroupBox):
     def __init__(self):
         super().__init__()
+        self.layout = QGridLayout()
+        self.setLayout(self.layout)
 
     def try_save(self):
         raise NotImplementedError()

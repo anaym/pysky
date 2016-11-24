@@ -19,11 +19,13 @@ class TextItem(Item):
         self._edit_mode = False
         self._apply_edit = False
         label = label if not label is None else camel_case_to_normal(name)
-        self.addWidget(QLabel(label), 0, 0)
-        self.addWidget(self._widget, 0, 1)
-        self.setSpacing(1)
+        self.layout.addWidget(QLabel(label), 0, 0)
+        self.layout.addWidget(self._widget, 0, 1)
+        #self.setSpacing(1)
         self._widget.returnPressed.connect(self._inverse_editing)
         self._widget.setReadOnly(ro)
+        self.layout.setContentsMargins(0, 0, 0, 0)
+
 
     def _inverse_editing(self):
         self._edit_mode = not self._edit_mode

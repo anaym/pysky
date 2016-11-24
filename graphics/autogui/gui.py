@@ -1,3 +1,4 @@
+from PyQt5.QtWidgets import QGridLayout
 from PyQt5.QtWidgets import QWidget
 
 from graphics.autogui.cast_tools import to_widget
@@ -9,12 +10,12 @@ class GUI(Item):
     def __init__(self, name: str):
         super().__init__()
         self._nested = []
-        self.addLayout(LabelItem(name, True), 0, 0)
-        self.setContentsMargins(10, 1, 1, 10)
+        #self._layout.addLayout(LabelItem(name, True), 0, 0)
+        self.setTitle(name)
 
     def add(self, item: Item) -> Item:
         self._nested.append(item)
-        self.addLayout(item, len(self._nested) + 1, 0)
+        self.layout.addWidget(item, len(self._nested), 0)
         return item
 
     def try_load(self):
@@ -30,6 +31,6 @@ class GUI(Item):
         self.try_load()
 
     def to_widget(self) -> QWidget:
-        widget = to_widget(self)
+        #widget = to_widget(self)
         #widget.setStyleSheet("QWidget {margin: 0px}")
-        return widget
+        return self
