@@ -1,3 +1,4 @@
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QMouseEvent
 from math import atan2, degrees
 
@@ -12,6 +13,7 @@ class MouseControllableSky(KeyControllableSky):
         self.setMouseTracking(True)
         self._move_mode = False
         self._mouse_pos = (0, 0)
+        self._mouse_gpos = (0, 0)
         self._mouse_delta = (0, 0)
 
     def _apply_mouse_move(self):
@@ -27,15 +29,21 @@ class MouseControllableSky(KeyControllableSky):
     def mouseMoveEvent(self, e: QMouseEvent):
         self._mouse_delta = (e.x() - self._mouse_pos[0], e.y() - self._mouse_pos[1])
         self._mouse_pos = (e.x(), e.y())
-        self._apply_mouse_move()
+        self._mouse_gpos = (e.globalX(), e.globalY())
+        if self._move_mode:
+            self._apply_mouse_move()
 
     def mousePressEvent(self, e: QMouseEvent):
-        self._move_mode = True
+        if e.buttons() == Qt.LeftButton:
+            self._move_mode = True
         self._mouse_pos = (e.x(), e.y())
+        self._mouse_gpos = (e.globalX(), e.globalY())
         super().mousePressEvent(e)
 
     def mouseReleaseEvent(self, e: QMouseEvent):
-        self._move_mode = False
+        if e.buttons() == Qt.LeftButton:
+            self._move_mode = False
         self._mouse_pos = (e.x(), e.y())
+        self._mouse_gpos = (e.globalX(), e.globalY())
         super().mouseReleaseEvent(e)
 

@@ -9,7 +9,7 @@ from stars.sky_math import sign
 from stars.star import SPECTRAL_MAP
 
 
-class RenderSettings:
+class Settings:
     def __init__(self):
         self.fisheye = True
         self.spectral = True
@@ -49,7 +49,7 @@ class RenderSettings:
             painter.setPen(p)
 
 
-class ControllableRenderSettings:
+class ControllableSkySettings:
     def __init__(self):
         self.second_per_second = 1
         self.zoom = 1

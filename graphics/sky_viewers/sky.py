@@ -4,8 +4,9 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtWidgets import QWidget
 from graphics.autogui.cast_tools import to_widget
+from graphics.renderer.projector import Projector
 from graphics.renderer.renderer import Renderer
-from graphics.renderer.settings import ControllableRenderSettings
+from graphics.renderer.settings import ControllableSkySettings
 from graphics.renderer.watcher import Watcher
 from graphics.sky_viewers.image_viewer import ImageViewer
 from graphics.sky_viewers.utility import profile
@@ -17,7 +18,7 @@ class Sky(QMainWindow):
     def __init__(self, watcher: Watcher, sky_base: SkyDataBase):
         super().__init__()
         self._renderer = Renderer(watcher)
-        self.settings = ControllableRenderSettings()
+        self.settings = ControllableSkySettings()
 
         self._available_constellations = sky_base.constellations
         self._objects = []
@@ -32,6 +33,8 @@ class Sky(QMainWindow):
         self._timer.setInterval(33)
         self._rerender()
         self._timer.start()
+
+        self.setMouseTracking(True)
 
         self.setVisible(True)
 

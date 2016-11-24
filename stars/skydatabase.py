@@ -1,5 +1,4 @@
 import datetime
-
 from geometry.equatorial import Equatorial
 from stars.filter import Filter
 from stars.star import Star
@@ -11,8 +10,11 @@ class SkyDataBase:
         for star in stars:
             consts[star.constellation].append(star)
         self._constellations = {}
+        self._names = set()
         for cn in consts.keys():
             self._constellations[cn] = tuple(consts[cn])
+            for s in self._constellations[cn]:
+                self._names.add(s.name)
 
     @property
     def constellations(self):

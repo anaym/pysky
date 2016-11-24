@@ -1,4 +1,6 @@
 import datetime
+
+from geometry.equatorial import Equatorial
 from geometry.horizontal import Horizontal
 from graphics.renderer.camera import Camera
 from stars.star_time import StarTime
@@ -32,4 +34,7 @@ class Watcher(Camera):
     def position(self, value: Horizontal):
         self._position = value
         self._star_time = StarTime.from_local(self.position.a, self.local_time)
+
+    def to_horizontal(self, equ: Equatorial):
+        return equ.to_horizontal_system(self.star_time.total_degree % 360, self.position.h)
 

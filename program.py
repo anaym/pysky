@@ -6,6 +6,7 @@ from graphics.renderer.camera import Camera
 from graphics.renderer.watcher import Watcher
 from graphics.sky_viewers.key_controllable_sky import KeyControllableSky
 from graphics.sky_viewers.mouse_controllable_sky import MouseControllableSky
+from graphics.sky_viewers.triped_sky import TripedSky
 from stars.parser import TxtDataBaseParser
 
 
@@ -40,7 +41,7 @@ def main():
     watcher = Watcher(MAGNITOGORSK, datetime.datetime.now(), camera)
 
     app = QtWidgets.QApplication([])
-    MouseControllableSky(watcher, sky_base)
+    TripedSky(watcher, sky_base)
     app.exec()
 
 if __name__ == '__main__':

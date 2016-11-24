@@ -10,6 +10,7 @@ class Item(QGroupBox):
         if flat:
             self.setFlat(True)
             self.setStyleSheet("border:1;")
+        self.setMouseTracking(True)
 
     def try_save(self):
         raise NotImplementedError()
