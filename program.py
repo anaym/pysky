@@ -30,13 +30,16 @@ MAGNITOGORSK = City(53, 59)
 YEKATERINBURG = City(56, 60)
 
 
+# TODO: renderer --> 2D plane (points) --> image raenderer --> image
+
+
 def main():
     sky_base = TxtDataBaseParser().parse(get_all_lines_in_dir(r'stars\stars\txt', '.txt'))
     camera = Camera(Horizontal(0, 90), 60)
     watcher = Watcher(MAGNITOGORSK, datetime.datetime.now(), camera)
 
     app = QtWidgets.QApplication([])
-    KeyControllableSky(watcher, sky_base) # TODO: check Sky
+    KeyControllableSky(watcher, sky_base)
     app.exec()
 
 if __name__ == '__main__':

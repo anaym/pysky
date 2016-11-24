@@ -8,7 +8,7 @@ from graphics.autogui.label_item import LabelItem
 
 class GUI(Item):
     def __init__(self, name: str):
-        super().__init__()
+        super().__init__(False)
         self._nested = []
         #self._layout.addLayout(LabelItem(name, True), 0, 0)
         self.setTitle(name)

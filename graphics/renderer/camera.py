@@ -13,7 +13,7 @@ class Camera:
     def _update(self):
         self._oy = (self._see + Horizontal(self.up_rotation, -90)).to_point()
         self._ox_vector = self._see.to_point().vector_mul(self._oy)
-        self._transformation_matrix = numpy.array([list(self._ox_vector), list(self._oy), list(self._see.to_point())])
+        self._transformation_matrix = [self._ox_vector, self._oy, self._see.to_point()]
 
     @property
     def radius(self):

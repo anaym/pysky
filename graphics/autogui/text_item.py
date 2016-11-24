@@ -26,7 +26,6 @@ class TextItem(Item):
         self._widget.setReadOnly(ro)
         self.layout.setContentsMargins(0, 0, 0, 0)
 
-
     def _inverse_editing(self):
         self._edit_mode = not self._edit_mode
         if self._edit_mode:

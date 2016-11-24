@@ -57,25 +57,31 @@ class Renderer:
         self.settings.apply_color("star", self._painter)
         for o in (self._apply_time_rotation(s) for s in stars):
             self._draw_object(*o)
-        self.settings.apply_color("up", self._painter)
-        self._draw_object(Horizontal(0, 90), 0.005)
-        self.settings.apply_color("down", self._painter)
-        self._draw_object(Horizontal(0, -90), 0.005)
+        if self.settings.up_direction:
+            self._draw_up()
+        if self.settings.see_direction:
+            self._draw_see()
         self._painter.end()
         return self._buffer
 
     def _get_size(self, mag):
-        magsize = e**(2*pi + mag*(log(2) - 1))
-        return max(1, magsize / self.watcher.radius)
+        mag = e**(self.settings.exp_const + mag * self.settings.exp_factor)
+        mag = max(1, mag / self.watcher.radius)
+        mag = 0.005 if not self.settings.magnitude else mag/500
+        mag *= self.settings.pull
+        return mag
 
     def _apply_time_rotation(self, star: Star):
-        if self.settings.spectral:
-            self.settings.apply_color(star.spectral_class, self._painter)
-        mag = 0.005 if not self.settings.magnitude else self._get_size(star.magnitude)/500
-        return star.position.to_horizontal_system(self.watcher.star_time.total_degree % 360, self.watcher.position.h), mag
+        return star.position.to_horizontal_system(self.watcher.star_time.total_degree % 360, self.watcher.position.h), star
 
-    def _draw_object(self, pos: Horizontal, mag):
-        diameter = mag
+    def _draw_object(self, pos: Horizontal, star: Star):
+        if not star is None:
+            if self.settings.spectral:
+                self.settings.apply_color(star.spectral_class, self._painter)
+            diameter = self._get_size(star.magnitude)
+        else:
+            self.settings.apply_color('up', self._painter)
+            diameter = self._get_size(-1)
         if self.watcher.see.angle_to(pos) <= self.watcher.radius:
             delta = pos.to_point() - self.watcher.see.to_point()
             prj_delta = delta.rmul_to_matrix(self.watcher.transformation_matrix)
@@ -88,4 +94,18 @@ class Renderer:
     def _draw_background(self):
         self.settings.apply_color("sky", self._painter)
         self._painter.drawRect(0, 0, self.width, self.height)
+
+    def _draw_up(self):
+        self._draw_object(Horizontal(0, 90), None)
+        self._draw_object(Horizontal(0, -90), None)
+
+    def _draw_see(self):
+        self.settings.apply_color('see', self._painter)
+        diameter = self._get_size(-2)
+        diameter, _ = self._distortion(diameter, 0, self.watcher.radius, 0)
+        cx, cy = self._width // 2, self._height // 2
+        x, y = cx - diameter // 2, cy - diameter // 2
+        self._painter.drawEllipse(x, y, diameter, diameter)
+
+
 

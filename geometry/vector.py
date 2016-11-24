@@ -23,19 +23,20 @@ class Vector(NVector):
         return self.x*other.x + self.y*other.y + self.z*other.z
 
     def vector_mul(self, other):
-        x = numpy.linalg.det([[self.y, self.z], [other.y, other.z]])
-        y = -numpy.linalg.det([[self.x, self.z], [other.x, other.z]])
-        z = numpy.linalg.det([[self.x, self.y], [other.x, other.y]])
+        p, q, r = self
+        m, n, t = other
+        x = q*t-n*r
+        y = -(p*t-m*r)
+        z = (p*n-q*m)
         return Vector(x, y, z)
 
-    def mul_to_matrix(self, matrix):
-        return Vector(*numpy.matmul(list(self), matrix))
-
     def rmul_to_matrix(self, matrix):
-        return Vector(*numpy.matmul(matrix, list(self)))
-
-    def change_basis(self, x, y, z):
-        return self.rmul_to_matrix(numpy.array([list(x), list(y), list(z)]))
+        try:
+            return Vector(*(self.scalar_mul(row) for row in matrix))
+        except Exception as e:
+            print('!')
+            print(type(matrix))
+            print(e)
 
     def project_to(self, plane_normal_vector):
         sqr = plane_normal_vector.scalar_mul(plane_normal_vector)

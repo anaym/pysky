@@ -14,6 +14,7 @@ class BoolItem(Item):
         self._setter = lambda v: set_attribute(obj, fname, v)
         self._getter = lambda: get_attribute(obj, fname)
         self._widget.stateChanged.connect(self._on_changed)
+        self.layout.setContentsMargins(0, 0, 0, 0)
 
     def _on_changed(self):
         if self._lock:
