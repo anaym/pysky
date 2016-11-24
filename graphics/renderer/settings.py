@@ -16,9 +16,9 @@ class RenderSettings:
         self.magnitude = True
         self.up_direction = True
         self.see_direction = True
-        self.exp_const = 7 #2*math.pi
-        self.exp_factor = -0.3 #math.log(2) - 1
-        self.exp_factor = -0.3 #math.log(2) - 1
+        self.exp_const = 7 # 2*math.pi
+        self.exp_factor = -0.3 # math.log(2) - 1
+        self.exp_factor = -0.3 # math.log(2) - 1
         self.pull = 1
         self._earth_color = QColor(0, 100, 100)
         self._star_color = QColor(255, 255, 255)

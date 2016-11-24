@@ -1,10 +1,7 @@
 import sys
-
 from PyQt5.QtCore import Qt
-
 from geometry.horizontal import Horizontal
 from graphics.renderer.watcher import Watcher
-from graphics.sky_viewers.controllable_sky import ControllableSky
 from graphics.sky_viewers.filtrable_sky import FiltrableSky
 from graphics.sky_viewers.utility import KeyProcessor
 from stars.skydatabase import SkyDataBase
@@ -13,9 +10,7 @@ from stars.skydatabase import SkyDataBase
 class KeyControllableSky(FiltrableSky):
     def __init__(self, watcher: Watcher, sky_base: SkyDataBase):
         super().__init__(watcher, sky_base)
-
         self.setFocus()
-
         self._configurator_widget.setVisible(False)
         self._key_processor = KeyProcessor() \
             .register("look", self._look_around) \
@@ -57,6 +52,3 @@ class KeyControllableSky(FiltrableSky):
 
     def keyPressEvent(self, e):
         self._key_processor.execute(e.key())
-
-    def mousePressEvent(self, QMouseEvent):
-        self.setFocus()

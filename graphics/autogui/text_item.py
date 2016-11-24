@@ -21,7 +21,6 @@ class TextItem(Item):
         label = label if not label is None else camel_case_to_normal(name)
         self.layout.addWidget(QLabel(label), 0, 0)
         self.layout.addWidget(self._widget, 0, 1)
-        #self.setSpacing(1)
         self._widget.returnPressed.connect(self._inverse_editing)
         self._widget.setReadOnly(ro)
         self.layout.setContentsMargins(0, 0, 0, 0)

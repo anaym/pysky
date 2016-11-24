@@ -41,7 +41,7 @@ class ControllableSky(Sky):
         gui.add(ActionItem("Pause", self._switch_pause))
         gui.add(ActionItem("Current time", self._current_time))
 
-        self._configurator_widget = gui.to_widget()
+        self._configurator_widget = gui
         self._main.addWidget(self._configurator_widget, 0, 2)
         self._gui = gui
         self._timer.timeout.connect(self._gui_tick)
@@ -57,10 +57,6 @@ class ControllableSky(Sky):
 
     def _apply_constellation_filter(self, selected):
         self.filter.constellations = selected
-        #stars = self._sky_sphere.get_stars(selected)
-        #self._objects = stars
-        #self._update_image()
-        pass
 
     def _switch_pause(self):
         if self.settings.speed_rank != 0:

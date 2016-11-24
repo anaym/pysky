@@ -10,7 +10,6 @@ class GUI(Item):
     def __init__(self, name: str):
         super().__init__(False)
         self._nested = []
-        #self._layout.addLayout(LabelItem(name, True), 0, 0)
         self.setTitle(name)
 
     def add(self, item: Item) -> Item:
@@ -29,8 +28,3 @@ class GUI(Item):
     def handle(self):
         self.try_save()
         self.try_load()
-
-    def to_widget(self) -> QWidget:
-        #widget = to_widget(self)
-        #widget.setStyleSheet("QWidget {margin: 0px}")
-        return self

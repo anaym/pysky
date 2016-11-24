@@ -5,7 +5,7 @@ from graphics.autogui.field_item import FieldItem
 
 
 class HorizontalItem(FieldItem):
-    #TODO: move to Horizontal
+    # TODO: move to Horizontal
     @staticmethod
     def parse_str(s, regexp):
         match = regexp.match(s)

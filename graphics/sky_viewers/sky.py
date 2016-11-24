@@ -1,11 +1,8 @@
 import datetime
-
 from PyQt5 import QtCore
 from PyQt5 import QtWidgets
-from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtWidgets import QWidget
-
 from graphics.autogui.cast_tools import to_widget
 from graphics.renderer.renderer import Renderer
 from graphics.renderer.settings import ControllableRenderSettings
@@ -53,9 +50,7 @@ class Sky(QMainWindow):
         self._configurator_widget = QWidget()
         main.addWidget(self._configurator_widget, 0, 2)
 
-        main.setColumnStretch(0, 0)
         main.setColumnStretch(0, 2)
-
         self._main = main
 
         self.setWindowTitle("Sky: Powered by Anton Tolstov (aka anaym), atolstov.com, 2016")
