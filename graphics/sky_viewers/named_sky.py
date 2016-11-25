@@ -8,7 +8,7 @@ from graphics.sky_viewers.mouse_controllable_sky import MouseControllableSky
 from stars.skydatabase import SkyDataBase
 
 
-class TripedSky(MouseControllableSky):
+class NamedSky(MouseControllableSky):
     def __init__(self, watcher: Watcher, sky_base: SkyDataBase):
         super().__init__(watcher, sky_base)
         self._timer.timeout.connect(self._show_tip)
@@ -17,7 +17,7 @@ class TripedSky(MouseControllableSky):
 
     def _show_tip(self, it: bool=False):
         self._last_mouse = self._mouse_pos
-        star = self._renderer.find_star(*self._mouse_pos, 10)
+        star = self._renderer.find_star(*self._mouse_pos, 1)
         if star is not None:
             if self._last_star is None or star.star != self._last_star or it:
                 self._last_star = star.star

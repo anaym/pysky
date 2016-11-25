@@ -14,3 +14,9 @@ class FiltrableSky(ControllableSky):
         self._main.addWidget(self._filter_widget, 0, 1)
 
         self._timer.timeout.connect(gui.handle)
+        gui.constellations.on_double_press = self._look_to
+
+    def _look_to(self, const: str):
+        cpos = self._renderer.find_constellation(const)
+        if cpos is not None:
+            self._renderer.watcher.see = cpos

@@ -12,6 +12,7 @@ class Watcher(Camera):
         self._position = position
         self._local_time = local_time
         self._star_time = StarTime.from_local(position.a, local_time)
+        self.position = position
 
     @property
     def local_time(self):
@@ -33,6 +34,7 @@ class Watcher(Camera):
     @position.setter
     def position(self, value: Horizontal):
         self._position = value
+        self.see = value
         self._star_time = StarTime.from_local(self.position.a, self.local_time)
 
     def to_horizontal(self, equ: Equatorial):

@@ -2,8 +2,11 @@ from PyQt5.QtCore import QSize
 from PyQt5.QtGui import QImage
 from PyQt5.QtGui import QPainter
 
+from geometry.equatorial import Equatorial
+from geometry.horizontal import Horizontal
 from graphics.renderer.projector import Projector, ProjectedStar
 from graphics.renderer.watcher import Watcher
+from stars.star import Star
 
 
 class Renderer(Projector):
@@ -37,34 +40,38 @@ class Renderer(Projector):
             self._buffer = QImage(QSize(self.width, self.height), QImage.Format_RGB32)
 
     def render(self, stars: list):
+        self._painter.begin(self._buffer)
+        self._draw_background()
+        for o in self.project(stars):
+            self._draw_object(o)
         try:
-            self._painter.begin(self._buffer)
-            self._draw_background()
-            for o in self.project(stars):
-                self._draw_object(o)
-            #if self.settings.up_direction:
-            #    self._draw_up()
+            if self.settings.up_direction:
+                self._draw_up()
             if self.settings.see_direction:
                 self._draw_see()
             self._painter.end()
             return self._buffer
         except Exception as ex:
+            print('r')
             print(ex)
 
-    def _draw_object(self, pstar: ProjectedStar):
-        if self.settings.spectral:
+    def _draw_object(self, pstar: ProjectedStar, with_color=True):
+        if self.settings.spectral and with_color:
             self.settings.apply_color(pstar.star.spectral_class, self._painter)
 
-            x, y = pstar.cx - pstar.diameter//2, pstar.cy - pstar.diameter//2
-            self._painter.drawEllipse(x, y, pstar.diameter, pstar.diameter)
+        x, y = pstar.cx - pstar.diameter//2, pstar.cy - pstar.diameter//2
+        self._painter.drawEllipse(x, y, pstar.diameter, pstar.diameter)
 
     def _draw_background(self):
         self.settings.apply_color("sky", self._painter)
         self._painter.drawRect(0, 0, self.width, self.height)
 
-    #def _draw_up(self):
-    #    self._draw_object(ProjectedStar())
-    #    self._draw_object(Horizontal(0, -90), None)
+    def _draw_up(self):
+        self.settings.apply_color('up', self._painter)
+        if self.watcher.position is not None:
+            prjctd = self.project_star(self.watcher.position, Star(Equatorial(0, 90), '', -1, '', ''))
+            if prjctd is not None:
+                self._draw_object(prjctd, False)
 
     def _draw_see(self):
         self.settings.apply_color('see', self._painter)

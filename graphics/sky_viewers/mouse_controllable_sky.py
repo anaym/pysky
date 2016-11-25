@@ -41,8 +41,7 @@ class MouseControllableSky(KeyControllableSky):
         super().mousePressEvent(e)
 
     def mouseReleaseEvent(self, e: QMouseEvent):
-        if e.buttons() == Qt.LeftButton:
-            self._move_mode = False
+        self._move_mode = False
         self._mouse_pos = (e.x(), e.y())
         self._mouse_gpos = (e.globalX(), e.globalY())
         super().mouseReleaseEvent(e)
