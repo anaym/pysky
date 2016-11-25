@@ -56,8 +56,11 @@ class Renderer(Projector):
             print(ex)
 
     def _draw_object(self, pstar: ProjectedStar, with_color=True):
-        if self.settings.spectral and with_color:
-            self.settings.apply_color(pstar.star.spectral_class, self._painter)
+        if with_color:
+            if self.settings.spectral:
+                self.settings.apply_color(pstar.star.spectral_class, self._painter)
+            else:
+                self.settings.apply_color('star', self._painter)
 
         x, y = pstar.cx - pstar.diameter//2, pstar.cy - pstar.diameter//2
         self._painter.drawEllipse(x, y, pstar.diameter, pstar.diameter)
