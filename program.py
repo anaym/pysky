@@ -47,9 +47,9 @@ def main():
 
     app = QtWidgets.QApplication([])
     NamedSky(watcher, sky_base)
-    p = subprocess.Popen([sys.executable, "music.py"])
+    #p = subprocess.Popen([sys.executable, "music.py"])
     app.exec()
-    p.kill()
+    #p.kill()
 
 if __name__ == '__main__':
     main()

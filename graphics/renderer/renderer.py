@@ -89,9 +89,11 @@ class Renderer(Projector):
     def _draw_up(self):
         self.settings.apply_color('up', self._painter)
         if self.watcher.position is not None:
-            prjctd = self.project_star(self.watcher.position, Star(Equatorial(0, 90), '', -1, '', ''))
+            prjctd = self.project_star(self.watcher.position, Star(Equatorial(0, 90), '', -1, '', ''), True)
             if prjctd is not None:
-                self._draw_object(prjctd, False)
+                if prjctd.in_eye:
+                    self._draw_object(prjctd, False)
+                self._painter.drawLine(self.centre[0], self.centre[1], prjctd.cx, prjctd.cy)
 
     def _draw_see(self):
         self.settings.apply_color('see', self._painter)
