@@ -1,6 +1,10 @@
 import datetime
 import os
+import subprocess
+
 from PyQt5 import QtWidgets
+from PyQt5.QtMultimedia import QSound
+
 from geometry.horizontal import Horizontal
 from graphics.renderer.camera import Camera
 from graphics.renderer.watcher import Watcher
@@ -8,7 +12,8 @@ from graphics.sky_viewers.key_controllable_sky import KeyControllableSky
 from graphics.sky_viewers.mouse_controllable_sky import MouseControllableSky
 from graphics.sky_viewers.named_sky import NamedSky
 from stars.parser import TxtDataBaseParser
-
+#import vlc
+import sys
 
 def get_all_files_in_dir(path: str, ext: str):
     for fn in os.listdir(path):
@@ -42,7 +47,9 @@ def main():
 
     app = QtWidgets.QApplication([])
     NamedSky(watcher, sky_base)
+    p = subprocess.Popen([sys.executable, "music.py"])
     app.exec()
+    p.kill()
 
 if __name__ == '__main__':
     main()

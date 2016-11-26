@@ -26,6 +26,11 @@ class MouseControllableSky(KeyControllableSky):
         else:
             self._look_around(d[0]//20, d[1]//20, 0)
 
+    def _look_to_star(self, sx, sy):
+        star = self._renderer.find_star(sx, sy, 2)
+        if star is not None:
+            self._renderer.watcher.see = star.horizontal
+
     def mouseMoveEvent(self, e: QMouseEvent):
         self._mouse_delta = (e.x() - self._mouse_pos[0], e.y() - self._mouse_pos[1])
         self._mouse_pos = (e.x(), e.y())
@@ -46,3 +51,6 @@ class MouseControllableSky(KeyControllableSky):
         self._mouse_gpos = (e.globalX(), e.globalY())
         super().mouseReleaseEvent(e)
 
+    def mouseDoubleClickEvent(self, e: QMouseEvent):
+        self._look_to_star(e.x(), e.y())
+        super().mouseDoubleClickEvent(e)
