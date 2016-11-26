@@ -37,6 +37,8 @@ class Sky(QMainWindow):
         self.setMouseTracking(True)
 
         self.setVisible(True)
+        self._renderer.settings.pull = 0
+        self._i = 0
 
     def _create_ui(self):
         main = QtWidgets.QGridLayout()
@@ -73,6 +75,11 @@ class Sky(QMainWindow):
             return
         self._renderer.watcher.local_time += exec_delta*self.settings.second_per_second
         self._update_image()
+        if self._i <= 25:
+            self._renderer.settings.pull = self._i/25
+            self._i += 1
+        elif self._i == 26:
+            self._renderer.settings.pull = 1
 
     def mousePressEvent(self, QMouseEvent):
         self.setFocus()

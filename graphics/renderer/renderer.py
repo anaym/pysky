@@ -44,16 +44,14 @@ class Renderer(Projector):
         self._draw_background()
         for o in self.project(stars):
             self._draw_object(o)
-        try:
-            if self.settings.up_direction:
-                self._draw_up()
-            if self.settings.see_direction:
-                self._draw_see()
-            self._painter.end()
-            return self._buffer
-        except Exception as ex:
-            print('r')
-            print(ex)
+        if self.settings.up_direction:
+            self._draw_up()
+        if self.settings.see_direction:
+            self._draw_see()
+        if self.settings.compass:
+            self._draw_compass()
+        self._painter.end()
+        return self._buffer
 
     def _draw_object(self, pstar: ProjectedStar, with_color=True):
         if with_color:
@@ -68,6 +66,25 @@ class Renderer(Projector):
     def _draw_background(self):
         self.settings.apply_color("sky", self._painter)
         self._painter.drawRect(0, 0, self.width, self.height)
+
+    def _draw_compass(self):
+        n = self._draw_latidude_depencing_point(Equatorial(0, 90), 'north', -3)
+        s = self._draw_latidude_depencing_point(Equatorial(0, -90), 'south', -3)
+        try:
+            self.settings.apply_color('north', self._painter)
+            self._painter.drawLine(n.cx, n.cy, self.centre[0], self.centre[1])
+            self.settings.apply_color('south', self._painter)
+            self._painter.drawLine(self.centre[0], self.centre[1], s.cx, s.cy)
+        except Exception as e:
+            print(e)
+
+    def _draw_latidude_depencing_point(self, pos: Equatorial, color, size):
+        self.settings.apply_color(color, self._painter)
+        lat = pos.to_horizontal_with_latitude(self.watcher.position.h)
+        p_lat = self.project_star(lat, Star(pos, '', size, '', ''), True)
+        if p_lat is not None and p_lat.in_eye:
+            self._draw_object(p_lat, False)
+        return p_lat
 
     def _draw_up(self):
         self.settings.apply_color('up', self._painter)

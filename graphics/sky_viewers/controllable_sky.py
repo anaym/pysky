@@ -37,6 +37,7 @@ class ControllableSky(Sky):
         view.add(FloatItem(self._renderer.settings, "pull"))
         view.add(BoolItem(self._renderer.settings, "up_direction"))
         view.add(BoolItem(self._renderer.settings, "see_direction"))
+        view.add(BoolItem(self._renderer.settings, "compass"))
 
         gui.add(ActionItem("Save image", lambda: self.viewer.image.save("sky.jpg")))
         gui.add(ActionItem("Pause", self._switch_pause))

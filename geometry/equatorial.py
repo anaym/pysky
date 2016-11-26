@@ -9,9 +9,11 @@ class Equatorial(NVector):
     def __init__(self, a, d):
         super().__init__((to_0_360(a), to_cos_period_cutted(d)))
 
-    def to_horizontal_system(self, star_time_degree, h):
-        timed = Equatorial(self.a + star_time_degree, self.d)
-        f, t, d = apply(math.radians, h, *timed)
+    def apply_time_rotation(self, star_time_degree):
+        return Equatorial(self.a + star_time_degree, self.d)
+
+    def to_horizontal_with_latitude(self, h) -> Horizontal:
+        f, t, d = apply(math.radians, h, *self)
 
         cosz = FirstEquatorialToHorizontal.cosz(f, d, t)
         sina_sinz = FirstEquatorialToHorizontal.siza_sinz(d, t)
@@ -25,6 +27,10 @@ class Equatorial(NVector):
         a = math.atan2(sina, cosa)
         d = math.atan2(sinz, cosz)
         return Horizontal(*apply(math.degrees, a, math.pi/2 - d))
+
+    def to_horizontal_with_time(self, star_time_degree, h) -> Horizontal:
+        return self.apply_time_rotation(star_time_degree).to_horizontal_with_latitude(h)
+
 
     @property
     def a(self):
