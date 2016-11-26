@@ -1,7 +1,10 @@
 from collections import namedtuple
 from math import sqrt, e, log, pi
+from multiprocessing.pool import Pool
+
 from geometry.horizontal import Horizontal
 from graphics.renderer.settings import Settings
+from graphics.renderer.utility import try_or_print
 from graphics.renderer.watcher import Watcher
 from stars.star import Star
 
@@ -28,12 +31,16 @@ class Projector:
         self.centre = (0, 0)
         self._constellations = {}
 
-    def project(self, stars: list) -> list:
+    @try_or_print
+    def project(self, stars: list, forecast: bool) -> list:
         self._distortion = fisheye_distortion if self.settings.fisheye else scale_distortion
 
-        self._objects.clear()
-        self._constellations ={}
-        for o in (self._apply_time_rotation(s) for s in stars):
+        good = self._objects
+        self._objects = []
+        self._constellations = {}
+        src = stars if not forecast or len(good) == 0 else (s.star for s in good)
+        rotayted = map(self._apply_time_rotation, src)
+        for o in rotayted:
             if o[1].constellation in self._constellations:
                 current = self._constellations[o[1].constellation]
                 self._constellations[o[1].constellation] = min(current, o, key=lambda s: s[1].magnitude)
@@ -65,7 +72,7 @@ class Projector:
 
     def project_star(self, pos: Horizontal, star: Star, always_project: bool=False):
         diameter = self._get_size(star.magnitude if star is not None else -1)
-        in_eye = self.watcher.see.angle_to(pos) <= self.watcher.radius
+        in_eye = self.watcher.radius_low_bound < self.watcher.see.cos_to(pos) <= 1
         if in_eye or always_project:
             delta = pos.to_point() - self.watcher.see.to_point()
             prj_delta = delta.rmul_to_matrix(self.watcher.transformation_matrix)

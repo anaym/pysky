@@ -1,10 +1,27 @@
-from math import cos, sin, floor
+from functools import lru_cache
+from math import cos as mcos, sin as msin, atan2 as matan2, floor
 import datetime
 import jdcal
+
+from graphics.renderer.utility import try_or_print
 
 
 def sign(n):
     return -1 if n < 0 else (0 if n == 0 else 1)
+
+
+@lru_cache(128)
+def cos(a):
+    return mcos(a)
+
+
+@lru_cache(128)
+def sin(a):
+    return msin(a)
+
+@lru_cache(128)
+def atan2(y, x):
+    return matan2(y, x)
 
 
 class FirstEquatorialToHorizontal:

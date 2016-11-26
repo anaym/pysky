@@ -27,9 +27,11 @@ class ControllableSky(Sky):
         time.add(FloatItem(self.settings, "second_per_second"))
         time.add(FloatItem(self.settings, "speed_rank"))
         time.add(IntItem(self, "delay"))
+        time.add(IntItem(self, "_rdelay"))
 
         view = gui.add(GUI("VIEW"))
         view.add(BoolItem(self._renderer.settings, "fisheye"))
+        view.add(IntItem(self, "forecast_step"))
         view.add(BoolItem(self._renderer.settings, "spectral"))
         view.add(BoolItem(self._renderer.settings, "magnitude"))
         view.add(FloatItem(self._renderer.settings, "exp_factor"))

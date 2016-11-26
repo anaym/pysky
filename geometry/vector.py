@@ -13,11 +13,11 @@ class Vector(NVector):
     def length(self):
         return sqrt(self.scalar_mul(self))
 
-    def angle_to(self, other):
+    def cos_to(self, other):
         d = other - self
         if self.length == 0 or other.length == 0:
             return 0
-        return acos((self.length**2 + other.length**2 - d.length**2)/2/self.length/other.length)
+        return (self.length**2 + other.length**2 - d.length**2)/2/self.length/other.length
 
     def scalar_mul(self, other):
         return self.x*other.x + self.y*other.y + self.z*other.z

@@ -1,4 +1,6 @@
 import sys
+from math import sin, radians, cos
+
 from PyQt5.QtCore import Qt
 from geometry.horizontal import Horizontal
 from graphics.renderer.watcher import Watcher
@@ -46,9 +48,9 @@ class KeyControllableSky(FiltrableSky):
         self._filter_widget.setVisible(not self._filter_widget.isVisible())
 
     def _look_around(self, *delta):
-        da, dd, dr = delta
+        da, dh, dr = delta
         self._renderer.watcher.up_rotation += dr
-        self._renderer.watcher.see += Horizontal(da, dd)
+        self._renderer.watcher.see += Horizontal(da, dh)
 
     def keyPressEvent(self, e):
         self._key_processor.execute(e.key())

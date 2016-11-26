@@ -39,6 +39,9 @@ class Sky(QMainWindow):
         self.setVisible(True)
         self._renderer.settings.pull = 0
         self._i = 0
+        self._switcher = 0
+        self._rdelay = 1
+        self.forecast_step = 10
 
     def _create_ui(self):
         main = QtWidgets.QGridLayout()
@@ -66,13 +69,16 @@ class Sky(QMainWindow):
     def _update_image(self):
         self._renderer.width = self.viewer.width()
         self._renderer.height = self.viewer.height()
-        image = self._renderer.render(self._sky_sphere.get_stars(self.filter))
+        image = self._renderer.render(self._sky_sphere.get_stars(self.filter), self._switcher > 1)
+        if self.forecast_step > 0:
+            self._switcher = (self._switcher + 1) % self.forecast_step
         self.viewer.image = image
 
     @profile
     def _rerender(self, exec_delta: datetime.timedelta):
         if exec_delta is None:
             return
+        self._rdelay = exec_delta.microseconds/1000
         self._renderer.watcher.local_time += exec_delta*self.settings.second_per_second
         self._update_image()
         if self._i <= 25:

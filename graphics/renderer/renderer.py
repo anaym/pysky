@@ -1,3 +1,5 @@
+from multiprocessing.pool import Pool
+
 from PyQt5.QtCore import QSize
 from PyQt5.QtGui import QImage
 from PyQt5.QtGui import QPainter
@@ -5,6 +7,7 @@ from PyQt5.QtGui import QPainter
 from geometry.equatorial import Equatorial
 from geometry.horizontal import Horizontal
 from graphics.renderer.projector import Projector, ProjectedStar
+from graphics.renderer.utility import try_or_print
 from graphics.renderer.watcher import Watcher
 from stars.star import Star
 
@@ -39,10 +42,10 @@ class Renderer(Projector):
             self.centre = (self._width//2, self._height//2)
             self._buffer = QImage(QSize(self.width, self.height), QImage.Format_RGB32)
 
-    def render(self, stars: list):
+    def render(self, stars: list, forecast: bool):
         self._painter.begin(self._buffer)
         self._draw_background()
-        for o in self.project(stars):
+        for o in self.project(stars, forecast):
             self._draw_object(o)
         if self.settings.up_direction:
             self._draw_up()

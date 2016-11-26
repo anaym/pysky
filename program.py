@@ -1,3 +1,4 @@
+import cProfile
 import datetime
 import os
 import subprocess
@@ -53,3 +54,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+    #cProfile.run(main)
+    #main()

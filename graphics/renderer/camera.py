@@ -1,4 +1,5 @@
-import numpy
+from math import cos, radians
+
 from geometry.horizontal import Horizontal
 
 
@@ -6,6 +7,7 @@ class Camera:
     def __init__(self, see: Horizontal, radius):
         self._see = see
         self._radius = radius
+        self._radius_lb = cos(radians(self._radius))
         self._up_rotation = 0
         self._oyp = Horizontal(0, 0)
         self._update()
@@ -20,9 +22,9 @@ class Camera:
     def radius(self):
         return self._radius
 
-    @radius.setter
-    def radius(self, radius):
-        self._radius = radius
+    @property
+    def radius_low_bound(self):
+        return self._radius_lb
 
     @property
     def up(self) -> Horizontal:

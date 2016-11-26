@@ -3,13 +3,14 @@ import math
 from geometry.angle_helpers import to_0_360, to_cos_period_cutted, to_m180_180
 from geometry.nvector import NVector
 from geometry.vector import Vector
+from stars.sky_math import sin, cos
 
 
 class Horizontal(NVector):
     def __init__(self, a, h):
         h = to_m180_180(h)
         if h > 90:
-            h -= 90 -(h - 90)
+            h = 90 -(h - 90)
             a = to_0_360(180 + a)
         elif h < -90:
             h = -90 -(h - -90)
@@ -21,14 +22,19 @@ class Horizontal(NVector):
     def to_point(self, radius=1) -> Vector:
         a = math.radians(-self.a)
         h = math.radians(self.h)
-        z = radius*math.sin(h)
-        r = math.sqrt(radius**2 - z**2)
-        x = r*math.cos(a)
-        y = r*math.sin(a)
+        z = radius*sin(h)
+        r = radius*cos(h)
+        x = r*cos(a)
+        y = r*sin(a)
         return Vector(x, y, z)
 
-    def angle_to(self, other_point):
-        return math.degrees(self.to_point().angle_to(other_point.to_point()))
+    def cos_to(self, other):
+        other = other.to_point()
+        self = self.to_point()
+        d = other - self
+        if self.length == 0 or other.length == 0:
+            return 0
+        return 1 - d.length**2/2
 
     @property
     def a(self):
