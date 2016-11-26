@@ -7,13 +7,14 @@ class Camera:
         self._see = see
         self._radius = radius
         self._up_rotation = 0
-        self._oy = Horizontal(0, 0)
+        self._oyp = Horizontal(0, 0)
         self._update()
 
     def _update(self):
-        self._oy = (self._see + Horizontal(self.up_rotation, -90)).to_point()
-        self._ox_vector = self._see.to_point().vector_mul(self._oy)
-        self._transformation_matrix = [self._ox_vector, self._oy, self._see.to_point()]
+        self._oy = (self._see + Horizontal(self.up_rotation, -90))
+        self._oyp = self._oy.to_point()
+        self._ox_vector = self._see.to_point().vector_mul(self._oyp)
+        self._transformation_matrix = [self._ox_vector, self._oyp, self._see.to_point()]
 
     @property
     def radius(self):

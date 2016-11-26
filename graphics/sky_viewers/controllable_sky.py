@@ -18,6 +18,7 @@ class ControllableSky(Sky):
         camera = gui.add(GUI("CAMERA"))
         camera.add(HorizontalItem(self._renderer.watcher, "position", label="(долгота, широта)"))
         camera.add(HorizontalItem(self._renderer.watcher, "see"))
+        camera.add(HorizontalItem(self._renderer.watcher, "up", ro=True))
         camera.add(FloatItem(self._renderer.watcher, "up_rotation"))
 
         time = gui.add(GUI("DATE & TIME"))

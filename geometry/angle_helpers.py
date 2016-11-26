@@ -6,6 +6,13 @@ def to_0_360(degree):
     return (md + 360) % 360
 
 
+def to_m180_180(degree):
+    zt = to_0_360(degree)
+    if zt <= 180:
+        return zt
+    return zt - 360
+
+
 def to_cos_period_cutted(degree):
     if -90 <= degree <= 90:
         return degree

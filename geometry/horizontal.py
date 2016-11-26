@@ -1,13 +1,22 @@
 import math
 
-from geometry.angle_helpers import to_0_360, to_cos_period_cutted
+from geometry.angle_helpers import to_0_360, to_cos_period_cutted, to_m180_180
 from geometry.nvector import NVector
 from geometry.vector import Vector
 
 
 class Horizontal(NVector):
     def __init__(self, a, h):
-        super().__init__((to_0_360(a), to_cos_period_cutted(h)))
+        h = to_m180_180(h)
+        if h > 90:
+            h -= 90 -(h - 90)
+            a = to_0_360(180 + a)
+        elif h < -90:
+            h = -90 -(h - -90)
+            a = to_0_360(180 + a)
+        else:
+            a = to_0_360(a)
+        super().__init__((a, h))
 
     def to_point(self, radius=1) -> Vector:
         a = math.radians(-self.a)
@@ -37,3 +46,6 @@ class Horizontal(NVector):
 
     def __mul__(self, other):
         return Horizontal(*self._mul_(other))
+
+    def __str__(self):
+        return "({:.2f}, {:.2f})".format(self.a, self.h)
