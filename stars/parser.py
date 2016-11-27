@@ -1,5 +1,4 @@
 import re
-
 from geometry.angle_helpers import dtime_to_degree, time_to_degree
 from geometry.equatorial import Equatorial
 from stars.latin import EN2LAT_MAP

@@ -1,7 +1,4 @@
-from math import sqrt, acos
-
-import numpy
-
+from math import sqrt
 from geometry.nvector import NVector
 
 
@@ -31,12 +28,7 @@ class Vector(NVector):
         return Vector(x, y, z)
 
     def rmul_to_matrix(self, matrix):
-        try:
-            return Vector(*(self.scalar_mul(row) for row in matrix))
-        except Exception as e:
-            print('!')
-            print(type(matrix))
-            print(e)
+        return Vector(*(self.scalar_mul(row) for row in matrix))
 
     def project_to(self, plane_normal_vector):
         sqr = plane_normal_vector.scalar_mul(plane_normal_vector)

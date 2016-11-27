@@ -1,7 +1,6 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QMouseEvent
 from math import atan2, degrees
-
 from graphics.renderer.watcher import Watcher
 from graphics.sky_viewers.key_controllable_sky import KeyControllableSky
 from stars.skydatabase import SkyDataBase
@@ -27,9 +26,9 @@ class MouseControllableSky(KeyControllableSky):
             self._look_around(d[0]//20, d[1]//20, 0)
 
     def _look_to_star(self, sx, sy):
-        star = self._renderer.find_star(sx, sy, 2)
+        star = self.renderer.find_star(sx, sy, 2)
         if star is not None:
-            self._renderer.watcher.see = star.horizontal
+            self.renderer.watcher.see = star.horizontal
 
     def mouseMoveEvent(self, e: QMouseEvent):
         self._mouse_delta = (e.x() - self._mouse_pos[0], e.y() - self._mouse_pos[1])

@@ -1,9 +1,8 @@
 import math
-
 from geometry.angle_helpers import to_0_360, to_cos_period_cutted, apply
 from geometry.horizontal import Horizontal
 from geometry.nvector import NVector
-from stars.sky_math import FirstEquatorialToHorizontal, atan2
+from geometry.sky_math import FirstEquatorialToHorizontal, atan2
 
 
 class Equatorial(NVector):
@@ -31,7 +30,6 @@ class Equatorial(NVector):
 
     def to_horizontal_with_time(self, star_time_degree, h) -> Horizontal:
         return self.apply_time_rotation(star_time_degree).to_horizontal_with_latitude(h)
-
 
     @property
     def a(self):

@@ -1,5 +1,5 @@
 import datetime
-from stars.sky_math import StarTimeHelper
+from geometry.sky_math import StarTimeHelper
 
 
 class StarTime:

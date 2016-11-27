@@ -16,7 +16,6 @@ class Star:
         if constellation is None or pos is None or magnitude is None or spectral_class is None or name is None:
             raise ValueError()
         self._hash = hash(pos)
-        self._hpos = pos.to_horizontal_with_time(0, 0)
 
     @property
     def hpos(self):

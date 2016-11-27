@@ -3,8 +3,6 @@ from math import cos as mcos, sin as msin, atan2 as matan2, floor
 import datetime
 import jdcal
 
-from graphics.renderer.utility import try_or_print
-
 
 def sign(n):
     return -1 if n < 0 else (0 if n == 0 else 1)
@@ -18,6 +16,7 @@ def cos(a):
 @lru_cache(128)
 def sin(a):
     return msin(a)
+
 
 @lru_cache(128)
 def atan2(y, x):
@@ -62,5 +61,3 @@ class StarTimeHelper:
         day += dt.second / 24 / 60 / 60
         day += dt.microsecond / 24 / 60 / 60 / 1000000
         return day
-
-# TODO: alt + F8 - reformat file

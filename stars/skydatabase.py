@@ -1,7 +1,4 @@
-import datetime
-from geometry.equatorial import Equatorial
 from stars.filter import Filter
-from stars.star import Star
 
 
 class SkyDataBase:

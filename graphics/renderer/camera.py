@@ -1,5 +1,4 @@
 from math import cos, radians
-
 from geometry.horizontal import Horizontal
 
 

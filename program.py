@@ -1,9 +1,8 @@
-from os.path import join
-
 from requirements import Requirements
 Requirements((3, 5, 1)).add("PyQt5", "PyQt5>=5.7").add("jdcal", "jdcal>=1.3").critical_check()
 
 
+from os.path import join
 import datetime
 import os
 import subprocess

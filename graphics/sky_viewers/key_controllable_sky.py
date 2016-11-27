@@ -1,16 +1,14 @@
 import sys
-from math import sin, radians, cos, sqrt
-
 from PyQt5.QtCore import Qt
 from geometry.horizontal import Horizontal
 from graphics.renderer.utility import try_or_print
 from graphics.renderer.watcher import Watcher
-from graphics.sky_viewers.filtrable_sky import FiltrableSky
+from graphics.sky_viewers.filterable_sky import FilterableSky
 from graphics.sky_viewers.utility import KeyProcessor
 from stars.skydatabase import SkyDataBase
 
 
-class KeyControllableSky(FiltrableSky):
+class KeyControllableSky(FilterableSky):
     def __init__(self, watcher: Watcher, sky_base: SkyDataBase):
         super().__init__(watcher, sky_base)
         self.setFocus()
@@ -51,10 +49,10 @@ class KeyControllableSky(FiltrableSky):
     @try_or_print
     def _look_around(self, *delta):
         da, dh, dr = delta
-        self._renderer.watcher.up_rotation += dr
-        if abs(self._renderer.watcher.see.h + dh) > 90:
+        self.renderer.watcher.up_rotation += dr
+        if abs(self.renderer.watcher.see.h + dh) > 90:
             return
-        self._renderer.watcher.see += Horizontal(da, dh)
+        self.renderer.watcher.see += Horizontal(da, dh)
 
     def keyPressEvent(self, e):
         self._key_processor.execute(e.key())

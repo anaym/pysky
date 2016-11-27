@@ -1,7 +1,5 @@
 from collections import namedtuple
-from math import sqrt, e, log, pi
-from multiprocessing.pool import Pool
-
+from math import e
 from geometry.horizontal import Horizontal
 from graphics.renderer.settings import Settings
 from graphics.renderer.utility import try_or_print
@@ -26,14 +24,14 @@ class Projector:
         super().__init__()
         self.settings = Settings()
         self.watcher = watcher
-        self._distortion = fisheye_distortion
+        self.distortion = fisheye_distortion
         self._objects = []
         self.centre = (0, 0)
         self._constellations = {}
 
     @try_or_print
     def project(self, stars: list, forecast: bool) -> list:
-        self._distortion = fisheye_distortion if self.settings.fisheye else scale_distortion
+        self.distortion = fisheye_distortion if self.settings.fisheye else scale_distortion
 
         good = self._objects
         self._objects = []
@@ -41,8 +39,8 @@ class Projector:
         src = stars if all else (s.star for s in good)
         if all:
             self._constellations = {}
-        rotayted = map(self._apply_time_rotation, src)
-        for o in rotayted:
+        actual = map(self._apply_time_rotation, src)
+        for o in actual:
             if o[1].constellation in self._constellations:
                 current = self._constellations[o[1].constellation]
                 self._constellations[o[1].constellation] = min(current, o, key=lambda s: s[1].magnitude)
@@ -78,7 +76,7 @@ class Projector:
         if in_eye or always_project:
             delta = pos.to_point() - self.watcher.see.to_point()
             prj_delta = delta.rmul_to_matrix(self.watcher.transformation_matrix)
-            dx, dy = self._distortion(prj_delta.x, prj_delta.y, self.watcher.radius, prj_delta.z)
-            diameter, _ = self._distortion(diameter, 0, self.watcher.radius, prj_delta.z)
+            dx, dy = self.distortion(prj_delta.x, prj_delta.y, self.watcher.radius, prj_delta.z)
+            diameter, _ = self.distortion(diameter, 0, self.watcher.radius, prj_delta.z)
             cx, cy = self.centre[0] + dx, self.centre[1] + dy
             return ProjectedStar(cx, cy, pos, diameter, star, in_eye)

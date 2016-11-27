@@ -1,11 +1,12 @@
 import math
+
 from PyQt5.QtGui import QBrush
 from PyQt5.QtGui import QColor
 from PyQt5.QtGui import QPainter
 from PyQt5.QtGui import QPen
 
+from geometry.sky_math import sign
 from graphics.renderer.utility import hexstr_to_color
-from stars.sky_math import sign
 from stars.star import SPECTRAL_MAP
 
 
@@ -54,21 +55,3 @@ class Settings:
             painter.setBrush(b)
         if not p is None:
             painter.setPen(p)
-
-
-class ControllableSkySettings:
-    def __init__(self):
-        self.second_per_second = 1
-        self.zoom = 1
-
-    @property
-    def speed_rank(self):
-        if self.second_per_second == 0:
-            return 0
-        return (math.log10(abs(self.second_per_second)) + 1) * sign(self.second_per_second)
-
-    @speed_rank.setter
-    def speed_rank(self, value):
-        if value > 10:
-            raise ValueError()
-        self.second_per_second = 10 ** (abs(value) - 1) * sign(value)

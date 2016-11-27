@@ -16,30 +16,30 @@ class ControllableSky(Sky):
         gui = GUI("CONFIGURATOR")
 
         camera = gui.add(GUI("CAMERA"))
-        camera.add(HorizontalItem(self._renderer.watcher, "position", label="(долгота, широта)"))
-        camera.add(HorizontalItem(self._renderer.watcher, "see"))
-        camera.add(HorizontalItem(self._renderer.watcher, "up", ro=True))
-        camera.add(FloatItem(self._renderer.watcher, "up_rotation"))
+        camera.add(HorizontalItem(self.renderer.watcher, "position", label="(долгота, широта)"))
+        camera.add(HorizontalItem(self.renderer.watcher, "see"))
+        camera.add(HorizontalItem(self.renderer.watcher, "up", ro=True))
+        camera.add(FloatItem(self.renderer.watcher, "up_rotation"))
 
         time = gui.add(GUI("DATE & TIME"))
-        time.add(DateTimeItem(self._renderer.watcher, "local_time"))
-        time.add(FloatItem(self._renderer.watcher, "star_time", True))
+        time.add(DateTimeItem(self.renderer.watcher, "local_time"))
+        time.add(FloatItem(self.renderer.watcher, "star_time", True))
         time.add(FloatItem(self.settings, "second_per_second"))
         time.add(FloatItem(self.settings, "speed_rank"))
         time.add(IntItem(self, "delay"))
         time.add(IntItem(self, "_rdelay"))
 
         view = gui.add(GUI("VIEW"))
-        view.add(BoolItem(self._renderer.settings, "fisheye"))
+        view.add(BoolItem(self.renderer.settings, "fisheye"))
         view.add(IntItem(self, "forecast_step"))
-        view.add(BoolItem(self._renderer.settings, "spectral"))
-        view.add(BoolItem(self._renderer.settings, "magnitude"))
-        view.add(FloatItem(self._renderer.settings, "exp_factor"))
-        view.add(FloatItem(self._renderer.settings, "exp_const"))
-        view.add(FloatItem(self._renderer.settings, "pull"))
-        view.add(BoolItem(self._renderer.settings, "see_points"))
-        view.add(BoolItem(self._renderer.settings, "screen_centre"))
-        view.add(BoolItem(self._renderer.settings, "compass"))
+        view.add(BoolItem(self.renderer.settings, "spectral"))
+        view.add(BoolItem(self.renderer.settings, "magnitude"))
+        view.add(FloatItem(self.renderer.settings, "exp_factor"))
+        view.add(FloatItem(self.renderer.settings, "exp_const"))
+        view.add(FloatItem(self.renderer.settings, "pull"))
+        view.add(BoolItem(self.renderer.settings, "see_points"))
+        view.add(BoolItem(self.renderer.settings, "screen_centre"))
+        view.add(BoolItem(self.renderer.settings, "compass"))
 
         gui.add(ActionItem("Save image", lambda: self.viewer.image.save("sky.jpg")))
         gui.add(ActionItem("Pause", self._switch_pause))
@@ -48,10 +48,10 @@ class ControllableSky(Sky):
         self._configurator_widget = gui
         self._main.addWidget(self._configurator_widget, 0, 2)
         self._gui = gui
-        self._timer.timeout.connect(self._gui_tick)
+        self.timer.timeout.connect(self._gui_tick)
 
     def _current_time(self):
-        self._renderer.watcher.local_time = datetime.now()
+        self.renderer.watcher.local_time = datetime.now()
 
     def _gui_tick(self):
         try:
