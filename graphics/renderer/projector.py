@@ -37,8 +37,10 @@ class Projector:
 
         good = self._objects
         self._objects = []
-        self._constellations = {}
-        src = stars if not forecast or len(good) == 0 else (s.star for s in good)
+        all = not forecast or len(good) == 0
+        src = stars if all else (s.star for s in good)
+        if all:
+            self._constellations = {}
         rotayted = map(self._apply_time_rotation, src)
         for o in rotayted:
             if o[1].constellation in self._constellations:

@@ -47,10 +47,10 @@ class Renderer(Projector):
         self._draw_background()
         for o in self.project(stars, forecast):
             self._draw_object(o)
-        if self.settings.up_direction:
-            self._draw_up()
-        if self.settings.see_direction:
-            self._draw_see()
+        if self.settings.see_points:
+            self._draw_see_points()
+        if self.settings.screen_centre:
+            self._draw_screen_centre()
         if self.settings.compass:
             self._draw_compass()
         self._painter.end()
@@ -89,16 +89,25 @@ class Renderer(Projector):
             self._draw_object(p_lat, False)
         return p_lat
 
-    def _draw_up(self):
-        self.settings.apply_color('up', self._painter)
+    @try_or_print
+    def _draw_see_points(self):
         if self.watcher.position is not None:
-            prjctd = self.project_star(self.watcher.position, Star(Equatorial(0, 90), '', -1, '', ''), True)
-            if prjctd is not None:
-                if prjctd.in_eye:
-                    self._draw_object(prjctd, False)
-                self._painter.drawLine(self.centre[0], self.centre[1], prjctd.cx, prjctd.cy)
+            forward = self.project_star(self.watcher.position, Star(Equatorial(0, 90), '', -1, '', ''), True)
+            upborder = self.project_star(Horizontal(0, 90), Star(Equatorial(0, 90), '', -1, '', ''), True)
+            downborder = self.project_star(Horizontal(0, -90), Star(Equatorial(0, 90), '', -1, '', ''), True)
+            self.settings.apply_color('up', self._painter)
+            if forward.in_eye:
+                self._draw_object(forward, False)
+            self._painter.drawLine(self.centre[0], self.centre[1], forward.cx, forward.cy)
+            self.settings.apply_color('up_border', self._painter)
+            if upborder.in_eye:
+                self._draw_object(upborder, False)
+            self._painter.drawLine(self.centre[0], self.centre[1], upborder.cx, upborder.cy)
+            if downborder.in_eye:
+                self._draw_object(downborder, False)
+            self._painter.drawLine(self.centre[0], self.centre[1], downborder.cx, downborder.cy)
 
-    def _draw_see(self):
+    def _draw_screen_centre(self):
         self.settings.apply_color('see', self._painter)
         diameter = self._get_size(-2)
         diameter, _ = self._distortion(diameter, 0, self.watcher.radius, 0)

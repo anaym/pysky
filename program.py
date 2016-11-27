@@ -1,20 +1,23 @@
-import cProfile
+from os.path import join
+
+from requirements import Requirements
+Requirements().add("PyQt5", "PyQt5>=5.7").add("jdcal", "jdcal>=1.3").critical_check()
+
+
 import datetime
 import os
 import subprocess
-
 from PyQt5 import QtWidgets
-from PyQt5.QtMultimedia import QSound
-
 from geometry.horizontal import Horizontal
 from graphics.renderer.camera import Camera
 from graphics.renderer.watcher import Watcher
-from graphics.sky_viewers.key_controllable_sky import KeyControllableSky
-from graphics.sky_viewers.mouse_controllable_sky import MouseControllableSky
 from graphics.sky_viewers.named_sky import NamedSky
 from stars.parser import TxtDataBaseParser
-#import vlc
 import sys
+
+
+
+
 
 def get_all_files_in_dir(path: str, ext: str):
     for fn in os.listdir(path):
@@ -48,11 +51,9 @@ def main():
 
     app = QtWidgets.QApplication([])
     NamedSky(watcher, sky_base)
-    #p = subprocess.Popen([sys.executable, "music.py"])
+    p = subprocess.Popen([sys.executable, "sound.py", join("resources", "Still Alive.mp3")])
     app.exec()
-    #p.kill()
+    p.kill()
 
 if __name__ == '__main__':
     main()
-    #cProfile.run(main)
-    #main()
