@@ -1,7 +1,7 @@
 from os.path import join
 
 from requirements import Requirements
-Requirements().add("PyQt5", "PyQt5>=5.7").add("jdcal", "jdcal>=1.3").critical_check()
+Requirements((3, 5, 1)).add("PyQt5", "PyQt5>=5.7").add("jdcal", "jdcal>=1.3").critical_check()
 
 
 import datetime
@@ -14,9 +14,6 @@ from graphics.renderer.watcher import Watcher
 from graphics.sky_viewers.named_sky import NamedSky
 from stars.parser import TxtDataBaseParser
 import sys
-
-
-
 
 
 def get_all_files_in_dir(path: str, ext: str):

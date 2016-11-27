@@ -2,20 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2c255ccb-d2a1-4441-a57b-39b8b903fb78" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sound.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/music.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/music.wav" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/music.mp3" afterPath="$PROJECT_DIR$/resources/Still Alive.mp3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/'stat.txt'" afterPath="$PROJECT_DIR$/'stat.txt'" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/graphics/renderer/camera.py" afterPath="$PROJECT_DIR$/graphics/renderer/camera.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/graphics/renderer/projector.py" afterPath="$PROJECT_DIR$/graphics/renderer/projector.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/graphics/renderer/renderer.py" afterPath="$PROJECT_DIR$/graphics/renderer/renderer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/graphics/renderer/settings.py" afterPath="$PROJECT_DIR$/graphics/renderer/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/graphics/sky_viewers/controllable_sky.py" afterPath="$PROJECT_DIR$/graphics/sky_viewers/controllable_sky.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/graphics/sky_viewers/key_controllable_sky.py" afterPath="$PROJECT_DIR$/graphics/sky_viewers/key_controllable_sky.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/graphics/sky_viewers/sky.py" afterPath="$PROJECT_DIR$/graphics/sky_viewers/sky.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/program.py" afterPath="$PROJECT_DIR$/program.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirements.py" afterPath="$PROJECT_DIR$/requirements.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sound.py" afterPath="$PROJECT_DIR$/sound.py" />
     </list>
     <ignored path="pysky.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -75,8 +65,8 @@
       <file leaf-file-name="sound.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sound.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="61" column="24" selection-start-line="61" selection-start-column="24" selection-end-line="61" selection-end-column="24" />
+            <state relative-caret-position="34">
+              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -95,12 +85,12 @@
       <file leaf-file-name="program.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/program.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="769">
-              <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+            <state relative-caret-position="21">
+              <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
-                <marker date="1480224426620" expanded="true" signature="498:507" ph="..." />
-                <marker date="1480224426620" expanded="true" signature="669:678" ph="..." />
+                <marker date="1480224900096" expanded="true" signature="504:513" ph="..." />
+                <marker date="1480224900096" expanded="true" signature="675:684" ph="..." />
               </folding>
             </state>
           </provider>
@@ -133,11 +123,9 @@
       <file leaf-file-name="sky.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/graphics/sky_viewers/sky.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="748">
-              <caret line="44" column="31" selection-start-line="44" selection-start-column="31" selection-end-line="44" selection-end-column="31" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="187">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -145,8 +133,8 @@
       <file leaf-file-name="requirements.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/requirements.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="75" column="24" selection-start-line="75" selection-start-column="24" selection-end-line="75" selection-end-column="24" />
+            <state relative-caret-position="408">
+              <caret line="24" column="94" selection-start-line="24" selection-start-column="94" selection-end-line="24" selection-end-column="94" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -227,9 +215,9 @@
         <option value="$PROJECT_DIR$/graphics/renderer/renderer.py" />
         <option value="$PROJECT_DIR$/graphics/sky_viewers/key_controllable_sky.py" />
         <option value="$PROJECT_DIR$/music.py" />
-        <option value="$PROJECT_DIR$/graphics/sky_viewers/sky.py" />
-        <option value="$PROJECT_DIR$/requirements.py" />
         <option value="$PROJECT_DIR$/sound.py" />
+        <option value="$PROJECT_DIR$/requirements.py" />
+        <option value="$PROJECT_DIR$/graphics/sky_viewers/sky.py" />
         <option value="$PROJECT_DIR$/program.py" />
       </list>
     </option>
@@ -691,13 +679,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10642782" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32035595" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32834226" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32912722" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29365963" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29365963" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43826473" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973805" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1105,14 +1093,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphics/sky_viewers/named_sky.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/graphics/renderer/renderer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -1141,42 +1121,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphics/sky_viewers/sky.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="44" column="31" selection-start-line="44" selection-start-column="31" selection-end-line="44" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/requirements.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="75" column="24" selection-start-line="75" selection-start-column="24" selection-end-line="75" selection-end-column="24" />
+        <state relative-caret-position="408">
+          <caret line="24" column="94" selection-start-line="24" selection-start-column="94" selection-end-line="24" selection-end-column="94" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/graphics/sky_viewers/sky.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphics/sky_viewers/named_sky.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sound.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="61" column="24" selection-start-line="61" selection-start-column="24" selection-end-line="61" selection-end-column="24" />
+        <state relative-caret-position="34">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/program.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="769">
-          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+        <state relative-caret-position="21">
+          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
-            <marker date="1480224426620" expanded="true" signature="498:507" ph="..." />
-            <marker date="1480224426620" expanded="true" signature="669:678" ph="..." />
+            <marker date="1480224900096" expanded="true" signature="504:513" ph="..." />
+            <marker date="1480224900096" expanded="true" signature="675:684" ph="..." />
           </folding>
         </state>
       </provider>

@@ -1,5 +1,5 @@
 from requirements import Requirements
-Requirements().add("PyQt5", "PyQt5>=5.7").critical_check()
+Requirements((3, 5, 1)).add("PyQt5", "PyQt5>=5.7").critical_check()
 
 
 import os

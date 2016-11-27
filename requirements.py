@@ -7,14 +7,9 @@ from os.path import join
 
 
 class Requirements:
-    def __init__(self, libs=None):
+    def __init__(self, min_python_version=None):
+        self._min_pyver = min_python_version
         self._libs = {}
-        if libs is not None:
-            for lib in libs:
-                if lib is tuple:
-                    self._libs[lib[0]] = lib[1]
-                else:
-                    self._libs[lib] = lib
 
     def add(self, import_name, pip_name=None):
         self._libs[import_name] = pip_name if pip_name is not None else import_name
@@ -25,8 +20,11 @@ class Requirements:
             print("Requirements problems!", file=sys.stderr)
             raise RuntimeError("Bad environment!")
 
-
     def check(self, try_install: bool=True):
+        if self._min_pyver and sys.version_info < self._min_pyver:
+            print("Too low version of python interpreter. Expected {}.{}.{} or great".format(*self._min_pyver))
+            return False
+
         problems = []
         for lib in self._libs:
             try:

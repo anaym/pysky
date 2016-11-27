@@ -4,13 +4,11 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtWidgets import QWidget
 from graphics.autogui.cast_tools import to_widget
-from graphics.renderer.projector import Projector
 from graphics.renderer.renderer import Renderer
 from graphics.renderer.settings import ControllableSkySettings
 from graphics.renderer.watcher import Watcher
 from graphics.sky_viewers.image_viewer import ImageViewer
 from graphics.sky_viewers.utility import profile
-from sound import SoundPlayer
 from stars.filter import Filter, Range
 from stars.skydatabase import SkyDataBase
 
