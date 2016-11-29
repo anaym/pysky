@@ -8,6 +8,7 @@ from graphics.sky_viewers.items.horizontal_item import HorizontalItem
 from graphics.sky_viewers.sky import Sky
 from stars.filter import Filter
 from stars.skydatabase import SkyDataBase
+from utility import try_or_print
 
 
 class ControllableSky(Sky):
@@ -54,11 +55,9 @@ class ControllableSky(Sky):
     def set_current_time(self):
         self.renderer.watcher.local_time = datetime.now()
 
+    @try_or_print
     def _gui_tick(self):
-        try:
-            self._gui.handle()
-        except Exception as e:
-            print(e)
+        self._gui.handle()
 
     def _apply_constellation_filter(self, selected):
         self.filter.constellations = selected

@@ -8,8 +8,8 @@ from graphics.renderer.renderer import Renderer
 from graphics.sky_viewers.settings import ControllableSkySettings
 from graphics.renderer.watcher import Watcher
 from graphics.sky_viewers.image_viewer import ImageViewer
-from graphics.sky_viewers.utility import profile
-from stars.filter import Filter, Range
+from utility import profile
+from stars.filter import Filter
 from stars.skydatabase import SkyDataBase
 
 

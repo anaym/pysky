@@ -1,4 +1,14 @@
+import datetime
 from PyQt5.QtGui import QColor
+
+
+def profile(foo):
+    def decorated(*args, **kwargs):
+        prev = foo.__last_call_time if "__last_call_time" in dir(foo) else None
+        lct = foo.__last_call_time = datetime.datetime.now()
+        kwargs["exec_delta"] = (lct - prev) if not prev is None else None
+        return foo(*args, **kwargs)
+    return decorated
 
 
 def hexstr_to_color(s: str):

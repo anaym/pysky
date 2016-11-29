@@ -84,5 +84,4 @@ def find_pip():
 
 
 def pip_install(pip, pip_module_name):
-    print(find_pip())
     subprocess.call("{} install {}".format(pip, pip_module_name))

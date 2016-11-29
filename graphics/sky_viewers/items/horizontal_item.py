@@ -5,7 +5,6 @@ from graphics.autogui.field_item import FieldItem
 
 
 class HorizontalItem(FieldItem):
-    # TODO: move to Horizontal
     @staticmethod
     def parse_str(s, regexp):
         match = regexp.match(s)
@@ -14,7 +13,6 @@ class HorizontalItem(FieldItem):
         groups = match.groupdict()
         if (not ("a" in groups)) or (not ("d" in groups)):
             raise ValueError()
-        print(groups["a"], groups["d"])
         return Horizontal(float(groups["a"]), float(groups["d"]))
 
     def __init__(self, obj: object, fname: str, ro: bool=False, label=None):
