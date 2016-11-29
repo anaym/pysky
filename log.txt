@@ -1,1 +1,0 @@
-Namespace(base='stars\\stars\\txt', console=True, d=None, music=False, out='stars when %d.%m.%Y %H_%M_%S.jpg', p=(53, 59), s=(59, 53))

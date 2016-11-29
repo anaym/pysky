@@ -43,15 +43,15 @@ class ControllableSky(Sky):
         view.add(BoolItem(self.renderer, "settings.compass"))
 
         gui.add(ActionItem("Save image", self.viewer.save_to_file))
-        gui.add(ActionItem("Pause", self._switch_pause))
-        gui.add(ActionItem("Current time", self._current_time))
+        gui.add(ActionItem("Pause", self.switch_pause))
+        gui.add(ActionItem("Current time", self.set_current_time))
 
         self._configurator_widget = gui
         self._main.addWidget(self._configurator_widget, 0, 2)
         self._gui = gui
         self.timer.timeout.connect(self._gui_tick)
 
-    def _current_time(self):
+    def set_current_time(self):
         self.renderer.watcher.local_time = datetime.now()
 
     def _gui_tick(self):
@@ -63,7 +63,7 @@ class ControllableSky(Sky):
     def _apply_constellation_filter(self, selected):
         self.filter.constellations = selected
 
-    def _switch_pause(self):
+    def switch_pause(self):
         if self.settings.speed_rank != 0:
             self._ssr = self.settings.speed_rank
             self.settings.speed_rank = 0

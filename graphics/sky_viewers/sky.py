@@ -27,17 +27,18 @@ class Sky(QMainWindow):
         self._create_ui()
 
         self.timer = QtCore.QTimer(self)
-        self.timer.timeout.connect(self._rerender)
+        self.timer.timeout.connect(self.rerender)
         self.timer.setInterval(33)
         self.timer.start()
 
         self.renderer.settings.pull = 0
         self._i = 0
+        self.animation = True
         self._switcher = 0
         self._rdelay = 1
         self.forecast_step = 10
 
-        self._rerender()
+        self.rerender()
 
     def _create_ui(self):
         main = QtWidgets.QGridLayout()
@@ -74,17 +75,17 @@ class Sky(QMainWindow):
         self.viewer.image = image
 
     @profile
-    def _rerender(self, exec_delta: datetime.timedelta):
+    def rerender(self, exec_delta: datetime.timedelta):
         if exec_delta is None:
             return
         self._rdelay = exec_delta.microseconds/1000
         self.renderer.watcher.local_time += exec_delta * self.settings.second_per_second
-        self._update_image()
-        if self._i <= 25:
+        if self._i <= 25 and self.animation:
             self.renderer.settings.pull = self._i / 25
             self._i += 1
-        elif self._i == 26:
+        else:
             self.renderer.settings.pull = 1
+        self._update_image()
 
     def mousePressEvent(self, QMouseEvent):
         self.setFocus()
