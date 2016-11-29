@@ -26,3 +26,17 @@ def try_or_print(foo):
             print("Exception in {}({}; {}): {}".format(foo.__name__, e, args, kwargs))
             return None
     return decorated
+
+
+def for_iterator(name, enum):
+    def decorator(foo):
+        def decorated(*args, **kwargs):
+            if not kwargs:
+                kwargs = {}
+            results = []
+            for i in enum:
+                kwargs[name] = i
+                results.append(foo(*args, **kwargs))
+            return results
+        return decorated
+    return decorator

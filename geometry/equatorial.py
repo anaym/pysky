@@ -19,6 +19,8 @@ class Equatorial(NVector):
         sina_sinz = FirstEquatorialToHorizontal.siza_sinz(d, t)
         cosa_sinz = FirstEquatorialToHorizontal.cosa_sinz(f, d, t)
 
+        if abs(cosz) > 1:
+            cosz = 1 if cosz > 0 else -1
         sinz = math.sqrt(1 - cosz**2)
         if sinz == 0:
             return Horizontal(0, 90)
@@ -43,8 +45,7 @@ class Equatorial(NVector):
         return Equatorial(*self._add_(other))
 
     def __sub__(self, other):
-        return Equatorial(*self._sub_(other))
+        return self + other*(-1)
 
     def __mul__(self, other):
         return Equatorial(*self._mul_(other))
-
