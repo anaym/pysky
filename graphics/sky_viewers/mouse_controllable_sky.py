@@ -3,12 +3,13 @@ from PyQt5.QtGui import QMouseEvent
 from math import atan2, degrees
 from graphics.renderer.watcher import Watcher
 from graphics.sky_viewers.key_controllable_sky import KeyControllableSky
+from stars.filter import Filter
 from stars.skydatabase import SkyDataBase
 
 
 class MouseControllableSky(KeyControllableSky):
-    def __init__(self, watcher: Watcher, sky_base: SkyDataBase):
-        super().__init__(watcher, sky_base)
+    def __init__(self, watcher: Watcher, sky_base: SkyDataBase, filter: Filter):
+        super().__init__(watcher, sky_base, filter)
         self.setMouseTracking(True)
         self._move_mode = False
         self._mouse_pos = (0, 0)

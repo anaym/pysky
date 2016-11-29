@@ -6,12 +6,13 @@ from graphics.autogui.gui import GUI
 from graphics.renderer.watcher import Watcher
 from graphics.sky_viewers.items.horizontal_item import HorizontalItem
 from graphics.sky_viewers.sky import Sky
+from stars.filter import Filter
 from stars.skydatabase import SkyDataBase
 
 
 class ControllableSky(Sky):
-    def __init__(self, watcher: Watcher, sky_base: SkyDataBase):
-        super().__init__(watcher, sky_base)
+    def __init__(self, watcher: Watcher, sky_base: SkyDataBase, filter: Filter):
+        super().__init__(watcher, sky_base, filter)
 
         gui = GUI("CONFIGURATOR")
 
@@ -30,18 +31,18 @@ class ControllableSky(Sky):
         time.add(IntItem(self, "_rdelay"))
 
         view = gui.add(GUI("VIEW"))
-        view.add(BoolItem(self.renderer.settings, "fisheye"))
+        view.add(BoolItem(self.renderer, "settings.fisheye"))
         view.add(IntItem(self, "forecast_step"))
-        view.add(BoolItem(self.renderer.settings, "spectral"))
-        view.add(BoolItem(self.renderer.settings, "magnitude"))
-        view.add(FloatItem(self.renderer.settings, "exp_factor"))
-        view.add(FloatItem(self.renderer.settings, "exp_const"))
-        view.add(FloatItem(self.renderer.settings, "pull"))
-        view.add(BoolItem(self.renderer.settings, "see_points"))
-        view.add(BoolItem(self.renderer.settings, "screen_centre"))
-        view.add(BoolItem(self.renderer.settings, "compass"))
+        view.add(BoolItem(self.renderer, "settings.spectral"))
+        view.add(BoolItem(self.renderer, "settings.magnitude"))
+        view.add(FloatItem(self.renderer, "settings.exp_factor"))
+        view.add(FloatItem(self.renderer, "settings.exp_const"))
+        view.add(FloatItem(self.renderer, "settings.pull"))
+        view.add(BoolItem(self.renderer, "settings.see_points"))
+        view.add(BoolItem(self.renderer, "settings.screen_centre"))
+        view.add(BoolItem(self.renderer, "settings.compass"))
 
-        gui.add(ActionItem("Save image", lambda: self.viewer.image.save("sky.jpg")))
+        gui.add(ActionItem("Save image", self.viewer.save_to_file))
         gui.add(ActionItem("Pause", self._switch_pause))
         gui.add(ActionItem("Current time", self._current_time))
 

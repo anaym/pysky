@@ -2,12 +2,13 @@ from PyQt5.QtCore import QPoint
 from PyQt5.QtWidgets import QToolTip
 from graphics.renderer.watcher import Watcher
 from graphics.sky_viewers.mouse_controllable_sky import MouseControllableSky
+from stars.filter import Filter
 from stars.skydatabase import SkyDataBase
 
 
 class NamedSky(MouseControllableSky):
-    def __init__(self, watcher: Watcher, sky_base: SkyDataBase):
-        super().__init__(watcher, sky_base)
+    def __init__(self, watcher: Watcher, sky_base: SkyDataBase, filter: Filter):
+        super().__init__(watcher, sky_base, filter)
         self.timer.timeout.connect(self._show_tip)
         self._last_mouse = (0, 0)
         self._last_star = None

@@ -1,12 +1,13 @@
 from graphics.renderer.watcher import Watcher
 from graphics.sky_viewers.controllable_sky import ControllableSky
 from graphics.sky_viewers.items.filter_item import FilterItem
+from stars.filter import Filter
 from stars.skydatabase import SkyDataBase
 
 
 class FilterableSky(ControllableSky):
-    def __init__(self, watcher: Watcher, sky_base: SkyDataBase):
-        super().__init__(watcher, sky_base)
+    def __init__(self, watcher: Watcher, sky_base: SkyDataBase, filter: Filter):
+        super().__init__(watcher, sky_base, filter)
 
         gui = FilterItem(self.filter, self._available_constellations, self._apply_constellation_filter)
         self._filter_widget = gui

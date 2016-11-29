@@ -5,12 +5,13 @@ from graphics.renderer.utility import try_or_print
 from graphics.renderer.watcher import Watcher
 from graphics.sky_viewers.filterable_sky import FilterableSky
 from graphics.sky_viewers.utility import KeyProcessor
+from stars.filter import Filter
 from stars.skydatabase import SkyDataBase
 
 
 class KeyControllableSky(FilterableSky):
-    def __init__(self, watcher: Watcher, sky_base: SkyDataBase):
-        super().__init__(watcher, sky_base)
+    def __init__(self, watcher: Watcher, sky_base: SkyDataBase, filter: Filter):
+        super().__init__(watcher, sky_base, filter)
         self.setFocus()
         self._configurator_widget.setVisible(False)
         self._key_processor = KeyProcessor() \

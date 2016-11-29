@@ -16,6 +16,8 @@ class Renderer(Projector):
         self._painter = QPainter()
         self._width = 0
         self._height = 0
+        self.width = 1920
+        self.height = 1080
 
     @property
     def width(self):
@@ -86,7 +88,6 @@ class Renderer(Projector):
         if p_lat is not None and p_lat.in_eye:
             self._draw_object(p_lat, False)
         self._painter.drawLine(p_lat.cx, p_lat.cy, self.centre[0], self.centre[1])
-
 
     def _draw_object(self, pstar: ProjectedStar, with_color=True):
         if with_color:

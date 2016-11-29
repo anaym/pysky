@@ -9,19 +9,19 @@ from graphics.autogui.item import Item
 
 
 class CheckBoxSet(Item):
-    def __init__(self, str_set, handler=None):
+    def __init__(self, str_set, selected, handler=None):
         super().__init__()
         self._src = set(str_set)
         self._selected = set(str_set)
         self._handlers = [] if handler is None else [handler]
-        self._create_widget()
+        self._create_widget(selected)
         self._create_buttons()
 
-    def _create_widget(self):
+    def _create_widget(self, selected):
         self._model = QStandardItemModel()
         for row in sorted(self._src):
             item = QStandardItem(row)
-            item.setCheckState(2)
+            item.setCheckState(2 if row in selected else 0)
             item.setCheckable(True)
             item.setEditable(False)
             self._model.appendRow(item)

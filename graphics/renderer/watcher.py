@@ -12,7 +12,7 @@ class Watcher(Camera):
         self._position = position
         self._local_time = local_time
         self._star_time = StarTime.from_local(position.a, local_time)
-        self.position = position
+        #self.position = position
 
     @property
     def local_time(self):
