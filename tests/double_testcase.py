@@ -8,6 +8,6 @@ class DoubleTestCase(TestCase):
         if epsilon is None:
             super().assertEqual(first, second, msg)
         elif mod is None:
-            super().assertLess(abs(first - second), epsilon, msg)
+            self.assertLess(abs(first - second), epsilon, msg)
         else:
-            super().assertLess(abs(first - second)%mod, epsilon, msg)
+            self.assertLess(abs(first - second)%mod, epsilon, msg)

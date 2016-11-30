@@ -56,8 +56,8 @@ class InstallTask:
             print("\t{}".format(module))
         if pip is None:
             return False
-        answer = input("[Y]/n: ")
-        if answer in ["", "y", "Y", "yes", "yep", "Yes", "Yep", "YES", "YEP", "DA", "Да", "да", "д"]:
+        answer = input("[Y]/n: ").lower()
+        if answer in ["", "y", "yes", "yep", "ok", "da", "да", "д", "ага", "ок", "угу"]:
             self._install(pip)
             return True
         else:
@@ -78,7 +78,7 @@ def find_pip():
                 for name in names:
                     if file.startswith(name):
                         return join(dir, file)
-        except:
+        except Exception:
             pass
     return None
 

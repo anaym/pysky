@@ -1,6 +1,6 @@
 from requirements import Requirements
-Requirements((3, 5, 1)).add("PyQt5", "PyQt5>=5.7").critical_check()
 
+Requirements((3, 5, 1)).add("PyQt5", "PyQt5>=5.7").critical_check()
 
 import os
 import sys
@@ -52,11 +52,12 @@ class SoundPlayer(GUI):
         if self.player.position() == self.player.duration() and self.infinity:
             self.player.setPosition(0)
             self.player.play()
-        return 1000*self.player.position()//self.player.duration()
+        return 1000 * self.player.position() // self.player.duration()
 
     @progress.setter
     def progress(self, value):
-        return self.player.setPosition(value*self.player.duration()/1000)
+        return self.player.setPosition(value * self.player.duration() / 1000)
+
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
@@ -64,4 +65,3 @@ if __name__ == '__main__':
     app = QApplication([])
     ex = SoundPlayer(sys.argv[1])
     app.exec()
-

@@ -13,12 +13,7 @@ from stars.filter import Range
 from stars.parser import TxtDataBaseParser
 
 
-class City(Horizontal):
-    def __init__(self, широта, долгота):
-        super().__init__(долгота, широта)
-
-
-BUILTIN_CITIES = {"MGN": City(53, 59), "EKB": City(56, 60)}
+BUILTIN_CITIES = {"MGN": Horizontal(59, 53), "EKB": Horizontal(60, 56)}
 
 parser = ArgumentParser(
     description="Sky visualizer",
