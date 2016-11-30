@@ -35,10 +35,3 @@ def time_to_degree(h, m, s):
 
 def dtime_to_degree(degree, dm, ds):
     return sign(degree)*(abs(degree) + dm/60 + ds/3600)
-
-
-def apply(operation, *degrees):
-    res = []
-    for i in degrees:
-        res.append(operation(i))
-    return res

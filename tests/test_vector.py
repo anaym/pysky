@@ -5,7 +5,7 @@ from geometry.equatorial import Equatorial
 from geometry.horizontal import Horizontal
 from geometry.vector import Vector
 from tests.double_testcase import DoubleTestCase
-from utility import for_iterator
+from utility import foreach
 
 
 class VectorTest(DoubleTestCase):

@@ -3,7 +3,7 @@ from unittest import main
 from math import cos, radians, sin
 from geometry.equatorial import Equatorial
 from tests.double_testcase import DoubleTestCase
-from utility import for_iterator
+from utility import foreach
 
 
 class EquatorialTest(DoubleTestCase):
@@ -11,8 +11,8 @@ class EquatorialTest(DoubleTestCase):
         self.v = Equatorial(3, 4)
         self.a = Equatorial(1, 2)
 
-    @for_iterator("a", range(-360, 360, 1))
-    @for_iterator("d", range(-90, 90, 1))
+    @foreach("a", range(-360, 360, 1))
+    @foreach("d", range(-90, 90, 1))
     def test_init(self, a, d):
         v = Equatorial(a, d)
         self.assertEqual(cos(radians(a)), cos(radians(v.a)), epsilon=EquatorialTest.EPS)
@@ -35,9 +35,9 @@ class EquatorialTest(DoubleTestCase):
         self.assertEqual(s.a, 21)
         self.assertEqual(s.d, 28)
 
-    @for_iterator("s", range(0, 360, 8))
-    @for_iterator("a", range(-180, 180, 16))
-    @for_iterator("d", range(-90, 90, 2))
+    @foreach("s", range(0, 360, 8))
+    @foreach("a", range(-180, 180, 16))
+    @foreach("d", range(-90, 90, 2))
     def test_apply_time_rotation(self, s, a, d):
         v = Equatorial(a, d).apply_time_rotation(s)
         a += s

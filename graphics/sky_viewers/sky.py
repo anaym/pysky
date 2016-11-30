@@ -14,7 +14,7 @@ from stars.skydatabase import SkyDataBase
 
 
 class Sky(QMainWindow):
-    def __init__(self, watcher: Watcher, sky_base: SkyDataBase, filter: Filter):
+    def __init__(self, watcher: Watcher, sky_base: SkyDataBase, selector: Filter):
         super().__init__()
         self.renderer = Renderer(watcher)
         self.settings = ControllableSkySettings()
@@ -22,7 +22,7 @@ class Sky(QMainWindow):
         self._available_constellations = sky_base.constellations
         self._objects = []
         self._sky_sphere = sky_base
-        self.filter = filter
+        self.filter = selector
 
         self._create_ui()
 

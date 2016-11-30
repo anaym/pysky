@@ -28,7 +28,7 @@ def try_or_print(foo):
     return decorated
 
 
-def for_iterator(name, enum):
+def foreach(name, enum):
     def decorator(foo):
         def decorated(*args, **kwargs):
             if not kwargs:

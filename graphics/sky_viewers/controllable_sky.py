@@ -12,8 +12,8 @@ from utility import try_or_print
 
 
 class ControllableSky(Sky):
-    def __init__(self, watcher: Watcher, sky_base: SkyDataBase, filter: Filter):
-        super().__init__(watcher, sky_base, filter)
+    def __init__(self, watcher: Watcher, sky_base: SkyDataBase, selector: Filter):
+        super().__init__(watcher, sky_base, selector)
 
         gui = GUI("CONFIGURATOR")
 

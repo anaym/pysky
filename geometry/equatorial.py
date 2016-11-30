@@ -1,5 +1,5 @@
 import math
-from geometry.angle_helpers import to_0_360, to_cos_period_cutted, apply
+from geometry.angle_helpers import to_0_360, to_cos_period_cutted
 from geometry.horizontal import Horizontal
 from geometry.nvector import NVector
 from geometry.sky_math import FirstEquatorialToHorizontal, atan2
@@ -13,7 +13,7 @@ class Equatorial(NVector):
         return Equatorial(self.a + star_time_degree, self.d)
 
     def to_horizontal_with_latitude(self, h) -> Horizontal:
-        f, t, d = apply(math.radians, h, *self)
+        f, t, d = map(math.radians, (h, *self))
 
         cosz = FirstEquatorialToHorizontal.cosz(f, d, t)
         sina_sinz = FirstEquatorialToHorizontal.siza_sinz(d, t)
@@ -28,7 +28,7 @@ class Equatorial(NVector):
         cosa = cosa_sinz / sinz
         a = atan2(sina, cosa)
         d = atan2(sinz, cosz)
-        return Horizontal(*apply(math.degrees, a, math.pi/2 - d))
+        return Horizontal(*map(math.degrees, (a, math.pi/2 - d)))
 
     def to_horizontal_with_time(self, star_time_degree, h) -> Horizontal:
         return self.apply_time_rotation(star_time_degree).to_horizontal_with_latitude(h)

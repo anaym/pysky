@@ -8,8 +8,8 @@ from stars.skydatabase import SkyDataBase
 
 
 class MouseControllableSky(KeyControllableSky):
-    def __init__(self, watcher: Watcher, sky_base: SkyDataBase, filter: Filter):
-        super().__init__(watcher, sky_base, filter)
+    def __init__(self, watcher: Watcher, sky_base: SkyDataBase, selector: Filter):
+        super().__init__(watcher, sky_base, selector)
         self.setMouseTracking(True)
         self._move_mode = False
         self._mouse_pos = (0, 0)

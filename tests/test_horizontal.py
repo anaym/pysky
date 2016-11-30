@@ -4,7 +4,7 @@ from math import cos, radians, sin
 from geometry.equatorial import Equatorial
 from geometry.horizontal import Horizontal
 from tests.double_testcase import DoubleTestCase
-from utility import for_iterator
+from utility import foreach
 
 
 class HorizontalTest(DoubleTestCase):
@@ -12,8 +12,8 @@ class HorizontalTest(DoubleTestCase):
         self.v = Horizontal(3, 4)
         self.a = Horizontal(1, 2)
 
-    @for_iterator("a", range(-360, 360, 1))
-    @for_iterator("d", range(-90, 90, 1))
+    @foreach("a", range(-360, 360, 1))
+    @foreach("d", range(-90, 90, 1))
     def test_init(self, a, d):
         v = Equatorial(a, d)
         self.assertEqual(cos(radians(a)), cos(radians(v.a)), epsilon=HorizontalTest.EPS)
@@ -36,10 +36,10 @@ class HorizontalTest(DoubleTestCase):
         self.assertEqual(s.a, 21)
         self.assertEqual(s.h, 28)
 
-    @for_iterator("a0", range(-360, 360, 32))
-    @for_iterator("h0", range(-90, 90, 16))
-    @for_iterator("a1", range(-360, 360, 32))
-    @for_iterator("h1", range(-90, 90, 16))
+    @foreach("a0", range(-360, 360, 32))
+    @foreach("h0", range(-90, 90, 16))
+    @foreach("a1", range(-360, 360, 32))
+    @foreach("h1", range(-90, 90, 16))
     def test_cos_to(self, a0, h0, a1, h1):
         a = Horizontal(a0, h0)
         b = Horizontal(a1, h1)

@@ -9,8 +9,8 @@ from stars.skydatabase import SkyDataBase
 
 
 class KeyControllableSky(FilterableSky):
-    def __init__(self, watcher: Watcher, sky_base: SkyDataBase, filter: Filter):
-        super().__init__(watcher, sky_base, filter)
+    def __init__(self, watcher: Watcher, sky_base: SkyDataBase, selector: Filter):
+        super().__init__(watcher, sky_base, selector)
         self.setFocus()
         self._configurator_widget.setVisible(False)
         pr = self._key_processor = KeyProcessor()

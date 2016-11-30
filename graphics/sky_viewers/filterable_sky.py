@@ -6,8 +6,8 @@ from stars.skydatabase import SkyDataBase
 
 
 class FilterableSky(ControllableSky):
-    def __init__(self, watcher: Watcher, sky_base: SkyDataBase, filter: Filter):
-        super().__init__(watcher, sky_base, filter)
+    def __init__(self, watcher: Watcher, sky_base: SkyDataBase, selector: Filter):
+        super().__init__(watcher, sky_base, selector)
 
         gui = FilterItem(self.filter, self._available_constellations, self._apply_constellation_filter)
         self._filter_widget = gui

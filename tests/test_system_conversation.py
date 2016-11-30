@@ -5,11 +5,11 @@ from math import atan2, cos, radians, sin
 from geometry.equatorial import Equatorial
 from geometry.horizontal import Horizontal
 from tests.double_testcase import DoubleTestCase
-from utility import for_iterator
+from utility import foreach
 
 
 class EquatorialToHorizontalTest(DoubleTestCase):
-    @for_iterator("l", range(-90, 90, 8))
+    @foreach("l", range(-90, 90, 8))
     def test_conversation_bijection(self, l):
         equ = set()
         hor = set()
@@ -23,8 +23,8 @@ class EquatorialToHorizontalTest(DoubleTestCase):
 
 
 class HorizontalToPointTest(DoubleTestCase):
-    @for_iterator("a", range(-180, 180))
-    @for_iterator("h", range(-90, 90))
+    @foreach("a", range(-180, 180))
+    @foreach("h", range(-90, 90))
     def test_conversation(self, a, h):
         p = Horizontal(a, h).to_point()
         self.assertEqual(cos(radians(h))*cos(radians(-a)), p.x, epsilon=self.EPS)
