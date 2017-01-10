@@ -87,4 +87,12 @@
     + Изображение рендериться в классе Renderer
     + Sky - автоперересовывающаяся со временем небесная сфера
     + ControllableSky : Sky - визуализация с меню управления
-    + KeyControllableSky : ControllableSky - визуализауия с управлением с клавиатуры
+	+ FilterableSky : ControllableSky - фильрация по магнитуде/созвездию
+    + KeyControllableSky : FilterableSky - визуализауия с управлением с клавиатуры
+	+ MouseControllableSky : KeyControllableSky - визуализация, поддерживающая упарвление мышью
+	+ NamedSky : MouseControllableSky - подсказки о звездах
+
+### Примеры вывода:
+
+![Sky](examples/1.jpg?raw=true "Sky")
+![Andromeda](examples/2.jpg?raw=true "Andromeda")
